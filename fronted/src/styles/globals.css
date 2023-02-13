@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .heading {
+   @apply  text-[#272b41] text-4xl font-medium
+  }
+  .sub-heading{
+    @apply text-[#757575] text-xl
+  }
+ 
+}

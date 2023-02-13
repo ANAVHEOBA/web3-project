@@ -1,8 +1,17 @@
 import React from 'react'
+import DeskNavbar from './DeskNavbar'
+import MobileNavBar from './MobileNavBar'
 
 function Navbar() {
   return (
-    <div>Navbar</div>
+    <div>
+        <div className='block md:hidden'>
+            <MobileNavBar />
+        </div>
+        <div className='hidden md:block'>
+            <DeskNavbar />
+        </div>
+    </div>
   )
 }
 
