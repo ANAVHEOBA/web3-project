@@ -31,7 +31,7 @@ function FindSection() {
       <p className="text-center text-3xl font-semibold text-[#272b41]">
         What are you looking for?
       </p>
-      <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3 mx-14 md:mx-20 mt-5">
+      <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3 px-12 md:mx-20 mt-5">
         {findList.map((findItem) => {
           return (
             <FindCard

@@ -5,6 +5,7 @@ import styles from "@/styles/Home.module.css";
 import Banner from "@/components/Banner";
 import FindSection from "@/components/FindSection";
 import Categories from "@/components/Categories";
+import BookDoctor from "@/components/BookDoctor";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Banner />
         <FindSection />
         <Categories />
+        <BookDoctor />
       </main>
     </>
   );

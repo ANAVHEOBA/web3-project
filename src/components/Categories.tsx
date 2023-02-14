@@ -60,12 +60,26 @@ function Categories() {
       <p className="text-center sub-heading">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, hic.
       </p>
-      <div className="mx-28">
+      <div className="mx-10 md:mx-28">
         <Swiper
           spaceBetween={50}
           slidesPerView={6}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
+          breakpoints={{
+            360: {
+              slidesPerView: 2,
+              spaceBetween: 50,
+            },
+            768: {
+              slidesPerView: 6,
+              spaceBetween: 50,
+            },
+            1024: {
+              slidesPerView: 6,
+              spaceBetween: 50,
+            },
+          }}
         >
           {categoryList.map((categoryItem) => {
             return (
