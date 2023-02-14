@@ -1,0 +1,49 @@
+import React from "react";
+import { GoLocation, GoThumbsup } from "react-icons/go";
+
+function LocationTab() {
+  const timeSlot = [
+    {
+      id: 1,
+      days: "Mon - Sat",
+      time: ["10:00 AM - 2:00 PM", "4:00 PM - 9:00 PM"],
+    },
+    {
+      id: 2,
+      days: "Sun",
+      time: ["10:00 AM - 2:00 PM"],
+    },
+  ];
+  return (
+    <div className="px-5 py-5 border border-[#f0f0f0] rounded-lg flex flex-col md:flex-row space-y-3 justify-between">
+      {/* Left - about */}
+      <div className="space-y-3">
+        <h5 className="text-lg font-semibold">Smile Cute Dental Care Center</h5>
+        <p className="text-[#757575]">MDS - Periodontology and Oral Implantology, BDS</p>
+        <div className="flex items-center space-x-2 text-[#757575]">
+          <GoLocation className="h-6 w-6" />
+          <span>2286 Sundown Lane, Austin, Texas 78749, USA</span>
+        </div>
+      </div>
+      {/* center - time slot */}
+      <div>
+        {timeSlot.map((slotItem) => {
+          return (
+            <div key={slotItem.id}>
+              <p className="font-semibold text-xl ">{slotItem.days}</p>
+              {slotItem.time.map((timeItem, index) => {
+                return <p key={index}>{timeItem}</p>;
+              })}
+            </div>
+          );
+        })}
+      </div>
+      {/* right */}
+      <div>
+        <p className="font-medium text-lg">$ 250</p>
+      </div>
+    </div>
+  );
+}
+
+export default LocationTab;
