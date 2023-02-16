@@ -39,7 +39,7 @@ function Availabilities() {
     },
   ];
   return (
-    <div className="space-y-3  flex flex-col">
+    <div className="space-y-3 flex flex-col">
       <h5 className="font-semibold text-2xl">Add availability*</h5>
       <p className="text-[#585858]">
         Visitors will only be able to schedule appointments during available

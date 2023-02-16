@@ -45,7 +45,7 @@ function DoctorRegistration() {
   return (
     <div className="px-5 py-3">
       <div className="flex flex-col md:flex-row space-x-5 space-y-5">
-        <div className="space-y-3 md:w-[50rem]">
+        <div className="space-y-3 md:w-[24rem]">
           {registrationSteps.map((registrationStep) => {
             return (
               <div key={registrationStep.id} className="flex space-x-2 px-2 py-3 shadow-lg rounded-md cursor-pointer border border-[#F4F4F4]" onClick={() => dispatch(updateStep(registrationStep.id - 1))}>
@@ -60,14 +60,10 @@ function DoctorRegistration() {
             );
           })}
         </div>
-        <div>
+        <div className="w-full">
           {
             registrationSteps[doctorStep].component
           }
-            {/* <UploadIdentification /> */}
-          {/* <PersonalDetailsForm /> */}
-          {/* <DoctorVerification /> */}
-          {/* <Preferences /> */}
         </div>
       </div>
     </div>
