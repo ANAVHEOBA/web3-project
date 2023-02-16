@@ -13,6 +13,7 @@ module.exports = {
       },
       boxShadow: {
         "light": "2px 2px 13px rgb(0 0 0 / 10%)",
+        "input-box": "0px 24px 24px rgb(212 237 255 / 30%)",
       }
     },
   },

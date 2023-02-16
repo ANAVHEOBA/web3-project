@@ -16,5 +16,25 @@ body{
   .sub-heading{
     @apply text-[#757575] text-xl
   }
+
+  .input-box{
+    @apply bg-[#F5F6FA] border border-[#E6E9F4] h-10 rounded-md text-[#354052] px-1 py-1 focus:border-[#09E5AB] focus:outline-none focus:bg-white  md:w-96 placeholder:text-[#8E8E8F]
+  }
+
+  .form-group{
+    @apply space-y-2 border border-[#E6E9F4] px-5 py-5 rounded-md shadow-input-box
+  }
+
+  .input-label{
+      @apply font-medium
+  }
+
+  .input-group{
+    @apply flex flex-col space-y-2
+  }
+
+  .submit-btn{
+    @apply px-5 py-3 bg-primary-green text-white rounded-md
+  }
  
 }

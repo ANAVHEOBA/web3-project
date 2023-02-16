@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React from "react";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 function DeskNavbar() {
   const navItemList = [
@@ -36,9 +37,10 @@ function DeskNavbar() {
         </ul>
       </div>
       <div>
-        <button className="px-3 py-1 rounded-md border-2 border-primary-green text-primary-green transition transform ease duration-300 hover:text-white hover:bg-primary-green">
+      <ConnectButton />
+        {/* <button className="px-3 py-1 rounded-md border-2 border-primary-green text-primary-green transition transform ease duration-300 hover:text-white hover:bg-primary-green">
           Connect Wallet
-        </button>
+        </button> */}
       </div>
     </nav>
   );
