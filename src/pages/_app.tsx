@@ -11,6 +11,8 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Provider } from "react-redux";
 import { store } from "@/store";
+import { ThemeProvider } from "next-themes";
+
 import {
   getHuddleClient,
   HuddleClientProvider,
@@ -67,7 +69,7 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div>
+    <div className="dark:bg-[#030B29]">
       <Head>
         <title>DeDoctor</title>
         <meta
@@ -114,17 +116,19 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <link rel="apple-touch-icon" href="/logo-no-background.svg" />
       </Head>
-      <HuddleClientProvider value={huddleClient}>
-        <Provider store={store}>
-          <WagmiConfig client={wagmiClient}>
-            <RainbowKitProvider chains={chains}>
-              <Navbar />
-              <Component {...pageProps} />
-              <Footer />
-            </RainbowKitProvider>
-          </WagmiConfig>
-        </Provider>
-      </HuddleClientProvider>
+      <ThemeProvider enableSystem={true} attribute="class">
+        <HuddleClientProvider value={huddleClient}>
+          <Provider store={store}>
+            <WagmiConfig client={wagmiClient}>
+              <RainbowKitProvider chains={chains}>
+                <Navbar />
+                <Component {...pageProps} />
+                <Footer />
+              </RainbowKitProvider>
+            </WagmiConfig>
+          </Provider>
+        </HuddleClientProvider>
+      </ThemeProvider>
     </div>
   );
 }
