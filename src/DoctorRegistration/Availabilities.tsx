@@ -1,3 +1,4 @@
+import useIPFS from "@/hooks/storeIpfs";
 import React from "react";
 
 type preferenceStruct = {
@@ -13,9 +14,14 @@ type preferenceStruct = {
 type Props = {
   preference: preferenceStruct;
   setPreference: (preferenceData: preferenceStruct) => void;
+  submitIpfs: () => void;
 };
 
-const Availabilities: React.FC<Props> = ({ preference, setPreference }) => {
+const Availabilities: React.FC<Props> = ({
+  preference,
+  setPreference,
+  submitIpfs,
+}) => {
   const daysList = [
     {
       key: 1,
@@ -135,7 +141,7 @@ const Availabilities: React.FC<Props> = ({ preference, setPreference }) => {
           })}
         </div>
       </div>
-      <button className="submit-btn w-40">Save</button>
+      <button className="submit-btn w-40" onClick={submitIpfs}>Save</button>
     </div>
   );
 };

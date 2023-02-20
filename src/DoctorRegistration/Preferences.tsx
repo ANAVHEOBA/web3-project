@@ -17,9 +17,14 @@ type preferenceStruct = {
 type Props = {
   preference: preferenceStruct;
   setPreference: (preferenceData: preferenceStruct) => void;
+  submitIpfs: () => void;
 };
 
-const Preferences: React.FC<Props> = ({ preference, setPreference }) => {
+const Preferences: React.FC<Props> = ({
+  preference,
+  setPreference,
+  submitIpfs,
+}) => {
   interface preferenceStruct {
     id: number;
     title: string;
@@ -50,7 +55,7 @@ const Preferences: React.FC<Props> = ({ preference, setPreference }) => {
       id: 3,
       title: "Availabilities",
       component: (
-        <Availabilities preference={preference} setPreference={setPreference}  />
+        <Availabilities preference={preference} setPreference={setPreference} submitIpfs={submitIpfs} />
       ),
     },
   ];
