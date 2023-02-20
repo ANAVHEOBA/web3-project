@@ -6,7 +6,22 @@ import {
   AiOutlineWechat,
 } from "react-icons/ai";
 
-function OnlineConsultation() {
+type preferenceStruct = {
+  minAmount: number;
+  callType: string[];
+  language: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  days: string[];
+};
+
+type Props = {
+  preference: preferenceStruct;
+  setPreference: (preferenceData: preferenceStruct) => void;
+};
+
+const OnlineConsultation: React.FC<Props> = ({ preference, setPreference }) => {
   const callTypeList = [
     {
       key: 1,
@@ -54,16 +69,27 @@ function OnlineConsultation() {
         <label className="input-label" htmlFor="language">
           Language *
         </label>
-        <select className="input-box" placeholder="Select Language" id="language">
-          <option>French</option>
-          <option>Hindi</option>
-          <option>English</option>
-          <option>Tamil</option>
+        <select
+          className="input-box"
+          value={preference.minAmount}
+          onChange={(e) =>
+            setPreference({
+              ...preference,
+              language: e.currentTarget.value,
+            })
+          }
+          placeholder="Select Language"
+          id="language"
+        >
+          <option value={"french"}>French</option>
+          <option value={"hindi"}>Hindi</option>
+          <option value={"english"}>English</option>
+          <option value={"tamil"}>Tamil</option>
         </select>
       </div>
       <button className="submit-btn w-40">Save</button>
     </div>
   );
-}
+};
 
 export default OnlineConsultation;

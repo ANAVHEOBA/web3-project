@@ -11,8 +11,13 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-
-
+import {
+  getHuddleClient,
+  HuddleClientProvider,
+} from "@huddle01/huddle01-client";
+const huddleClient = getHuddleClient(
+  "1bc609a2c914912b57e4f3da0fdfc25e06fd643a87f3afe7dd159458b19fb412"
+);
 
 const shardeumChain: Chain = {
   id: 8081,
@@ -109,15 +114,17 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <link rel="apple-touch-icon" href="/logo-no-background.svg" />
       </Head>
-      <Provider store={store}>
-        <WagmiConfig client={wagmiClient}>
-          <RainbowKitProvider chains={chains}>
-            <Navbar />
-            <Component {...pageProps} />
-            <Footer />
-          </RainbowKitProvider>
-        </WagmiConfig>
-      </Provider>
+      <HuddleClientProvider value={huddleClient}>
+        <Provider store={store}>
+          <WagmiConfig client={wagmiClient}>
+            <RainbowKitProvider chains={chains}>
+              <Navbar />
+              <Component {...pageProps} />
+              <Footer />
+            </RainbowKitProvider>
+          </WagmiConfig>
+        </Provider>
+      </HuddleClientProvider>
     </div>
   );
 }

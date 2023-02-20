@@ -1,7 +1,29 @@
+import { updateStep } from "@/features/doctorStepSlice";
+import { RootState } from "@/store";
 import React from "react";
 import { GrDocumentText } from "react-icons/gr";
+import { useDispatch, useSelector } from "react-redux";
 
-function UploadIdentification() {
+type identificationStruct = {
+  docNumber: string;
+  docType: string;
+};
+
+type props = {
+  identificationData: identificationStruct;
+  setIdentificationData: (identificationData: identificationStruct) => void;
+  identificationDoc: any;
+  setIdentificationDoc: (image: any) => void;
+};
+
+const UploadIdentification: React.FC<props> = ({
+  identificationData,
+  setIdentificationData,
+  identificationDoc,
+  setIdentificationDoc,
+}) => {
+  const doctorStep = useSelector((state: RootState) => state.doctorStep.value);
+  const dispatch = useDispatch();
   return (
     <div className="form-group">
       <h5 className="font-semibold text-2xl">Upload identification</h5>
@@ -11,14 +33,26 @@ function UploadIdentification() {
         a secure system together
       </p>
       <div className="input-group">
-        <label className="input-label" htmlFor="gender">
-          Gender *
+        <label className="input-label" htmlFor="docType">
+          Document Type *
         </label>
-        <select className="input-box" placeholder="Select Gender" id="gender">
-          <option>Select Document Type</option>
-          <option>PDF</option>
-          <option>TXT</option>
-          <option>JPEC</option>
+        <select
+          name="docType"
+          className="input-box"
+          placeholder="Select Gender"
+          value={identificationData.docType}
+          onChange={(e) =>
+            setIdentificationData({
+              ...identificationData,
+              docType: e.currentTarget.value,
+            })
+          }
+          id="docType"
+        >
+          <option value={"none"}>Select Document Type</option>
+          <option value={"pdf"}>PDF</option>
+          <option value={"txt"}>TXT</option>
+          <option value={"jpec"}>JPEC</option>
         </select>
       </div>
       <div className="input-group">
@@ -30,6 +64,13 @@ function UploadIdentification() {
           id="name"
           className="input-box"
           placeholder="Enter Document Number"
+          value={identificationData.docNumber}
+          onChange={(e) =>
+            setIdentificationData({
+              ...identificationData,
+              docNumber: e.currentTarget.value,
+            })
+          }
         />
       </div>
       <div className="flex w-full">
@@ -43,14 +84,23 @@ function UploadIdentification() {
               <span className="font-semibold">Upload Document</span>
             </p>
           </div>
-          <input id="dropzone-file" type="file" className="hidden" />
+          <input
+            id="dropzone-file"
+            type="file"
+            className="hidden"
+            onChange={(e) =>
+              setIdentificationDoc(
+                e.currentTarget.files && e.currentTarget.files[0]
+              )
+            }
+          />
         </label>
       </div>
-      <button className="submit-btn">
+      <button className="submit-btn" onClick={() => dispatch(updateStep(2))}>
         Continue
       </button>
     </div>
   );
-}
+};
 
 export default UploadIdentification;

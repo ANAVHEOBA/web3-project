@@ -1,6 +1,21 @@
 import React from "react";
 
-function Availabilities() {
+type preferenceStruct = {
+  minAmount: number;
+  callType: string[];
+  language: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  days: string[];
+};
+
+type Props = {
+  preference: preferenceStruct;
+  setPreference: (preferenceData: preferenceStruct) => void;
+};
+
+const Availabilities: React.FC<Props> = ({ preference, setPreference }) => {
   const daysList = [
     {
       key: 1,
@@ -53,7 +68,14 @@ function Availabilities() {
           type={"date"}
           id="date"
           className="input-box"
-          placeholder="Enter Document Number"
+          placeholder="Enter Date"
+          value={preference.date}
+          onChange={(e) =>
+            setPreference({
+              ...preference,
+              date: e.currentTarget.value,
+            })
+          }
         />
       </div>
       <label className="input-label">Time will you be available?</label>
@@ -67,6 +89,13 @@ function Availabilities() {
             id="startTime"
             className="input-box"
             placeholder="City"
+            value={preference.startTime}
+            onChange={(e) =>
+              setPreference({
+                ...preference,
+                startTime: e.currentTarget.value,
+              })
+            }
           />
         </div>
         <div className="input-group">
@@ -78,6 +107,13 @@ function Availabilities() {
             id="endTime"
             className="input-box"
             placeholder="State"
+            value={preference.endTime}
+            onChange={(e) =>
+              setPreference({
+                ...preference,
+                endTime: e.currentTarget.value,
+              })
+            }
           />
         </div>
       </div>
@@ -102,6 +138,6 @@ function Availabilities() {
       <button className="submit-btn w-40">Save</button>
     </div>
   );
-}
+};
 
 export default Availabilities;

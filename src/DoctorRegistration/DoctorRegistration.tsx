@@ -3,42 +3,129 @@ import DoctorVerification from "./DoctorVerification";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 import Preferences from "./Preferences";
 import UploadIdentification from "./UploadIdentification";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import { updateStep } from "@/features/doctorStepSlice";
 import { RootState } from "@/store";
 
+type personalData = {
+  name: string;
+  gender: string;
+  dob: string;
+  address: string;
+  city: string;
+  state: string;
+  about: string;
+};
 
-function DoctorRegistration() {
-  // const [activeStep, setActiveStep] = useState(0);
-  const doctorStep = useSelector((state: RootState) => state.doctorStep.value)
-  const dispatch = useDispatch()
+type identificationStruct = {
+  docNumber: string;
+  docType: string;
+};
+
+type medicalCouncilStruct = {
+  councilNumber: string;
+  specialization: string;
+};
+
+type preferenceStruct = {
+  minAmount: number;
+  callType: string[];
+  language: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  days: string[];
+};
+
+const DoctorRegistration: React.FC = () => {
+  const doctorStep = useSelector((state: RootState) => state.doctorStep.value);
+  const dispatch = useDispatch();
+  // Personal Data
+  const [personalData, setPersonalData] = useState<personalData>({
+    name: "",
+    about: "",
+    address: "",
+    city: "",
+    dob: "",
+    gender: "",
+    state: "",
+  });
+  const [userImage, setUserImage] = useState<any>();
+  // identification Data
+  const [identificationData, setIdentificationData] =
+    useState<identificationStruct>({
+      docNumber: "",
+      docType: "",
+    });
+  const [identificationDoc, setIdentificationDoc] = useState<any>();
+  // doctor verification
+  const [medicalCouncilData, setMedicalCouncilData] =
+    useState<medicalCouncilStruct>({
+      councilNumber: "",
+      specialization: "",
+    });
+  const [councilFile, setCouncilFile] = useState<any>();
+  // preference
+  const [preference, setPreference] = useState<preferenceStruct>({
+    minAmount: 0,
+    callType: [""],
+    date: "",
+    days: [""],
+    startTime: "",
+    language: "",
+    endTime: "",
+  });
+
   const registrationSteps = [
     {
       id: 1,
       title: "Registration",
       subTitle: "Enter Details for Register ",
-      component : <PersonalDetailsForm />,
+      component: (
+        <PersonalDetailsForm
+          personalData={personalData}
+          setPersonalData={setPersonalData}
+          userImage={userImage}
+          setUserImage={setUserImage}
+        />
+      ),
       step: 1,
     },
     {
       id: 2,
       title: "Upload Identity",
       subTitle: "Upload your Identity for Verification",
-      component : <UploadIdentification />,
+      component: (
+        <UploadIdentification
+          identificationData={identificationData}
+          setIdentificationData={setIdentificationData}
+          identificationDoc={identificationDoc}
+          setIdentificationDoc={setIdentificationDoc}
+        />
+      ),
       step: 2,
     },
     {
       id: 3,
       title: "Doctor Verification",
       subTitle: "Setup Your Payment Details",
-      component : <DoctorVerification />,
+      component: (
+        <DoctorVerification
+          medicalCouncilData={medicalCouncilData}
+          setMedicalCouncilData={setMedicalCouncilData}
+          councilFile={councilFile}
+          setCouncilFile={setCouncilFile}
+        />
+      ),
       step: 3,
     },
     {
       id: 4,
       title: "Preferences",
       subTitle: "Setup Your Preferences for your Account",
-      component : <Preferences />,
+      component: (
+        <Preferences preference={preference} setPreference={setPreference} />
+      ),
       step: 4,
     },
   ];
@@ -48,7 +135,11 @@ function DoctorRegistration() {
         <div className="space-y-3 md:w-[24rem]">
           {registrationSteps.map((registrationStep) => {
             return (
-              <div key={registrationStep.id} className="flex space-x-2 px-2 py-3 shadow-lg rounded-md cursor-pointer border border-[#F4F4F4]" onClick={() => dispatch(updateStep(registrationStep.id - 1))}>
+              <div
+                key={registrationStep.id}
+                className="flex space-x-2 px-2 py-3 shadow-lg rounded-md cursor-pointer border border-[#F4F4F4]"
+                onClick={() => dispatch(updateStep(registrationStep.id - 1))}
+              >
                 <div className="rounded-full p-2 bg-[#10916F] text-white w-10 h-10 text-center">
                   {registrationStep.step}
                 </div>
@@ -60,14 +151,10 @@ function DoctorRegistration() {
             );
           })}
         </div>
-        <div className="w-full">
-          {
-            registrationSteps[doctorStep].component
-          }
-        </div>
+        <div className="w-full">{registrationSteps[doctorStep].component}</div>
       </div>
     </div>
   );
-}
+};
 
 export default DoctorRegistration;

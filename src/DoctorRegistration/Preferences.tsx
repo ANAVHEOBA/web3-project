@@ -4,7 +4,22 @@ import Availabilities from "./Availabilities";
 import CostConsultation from "./CostConsultation";
 import OnlineConsultation from "./OnlineConsultation";
 
-function Preferences() {
+type preferenceStruct = {
+  minAmount: number;
+  callType: string[];
+  language: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+  days: string[];
+};
+
+type Props = {
+  preference: preferenceStruct;
+  setPreference: (preferenceData: preferenceStruct) => void;
+};
+
+const Preferences: React.FC<Props> = ({ preference, setPreference }) => {
   interface preferenceStruct {
     id: number;
     title: string;
@@ -14,17 +29,29 @@ function Preferences() {
     {
       id: 1,
       title: "Cost of an Consultation",
-      component: <CostConsultation />,
+      component: (
+        <CostConsultation
+          preference={preference}
+          setPreference={setPreference}
+        />
+      ),
     },
     {
       id: 2,
       title: "Preferred means for online consultations",
-      component: <OnlineConsultation />,
+      component: (
+        <OnlineConsultation
+          preference={preference}
+          setPreference={setPreference}
+        />
+      ),
     },
     {
       id: 3,
       title: "Availabilities",
-      component: <Availabilities />,
+      component: (
+        <Availabilities preference={preference} setPreference={setPreference}  />
+      ),
     },
   ];
   const [activeTab, setActiveTab] = useState<number>(0);
@@ -55,7 +82,9 @@ function Preferences() {
                 />
               </div>
               <div
-                className={`${activeTab == preferenceItem.id ? "" : "hidden"} mt-5`}
+                className={`${
+                  activeTab == preferenceItem.id ? "" : "hidden"
+                } mt-5`}
               >
                 {preferenceItem.component}
               </div>
@@ -65,6 +94,6 @@ function Preferences() {
       </div>
     </div>
   );
-}
+};
 
 export default Preferences;

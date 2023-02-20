@@ -1,7 +1,29 @@
+import { updateStep } from "@/features/doctorStepSlice";
+import { RootState } from "@/store";
 import React from "react";
 import { GrDocument } from "react-icons/gr";
+import { useDispatch, useSelector } from "react-redux";
 
-function DoctorVerification() {
+type medicalCouncilStruct = {
+  councilNumber: string;
+  specialization: string;
+};
+
+type props = {
+  medicalCouncilData: medicalCouncilStruct;
+  setMedicalCouncilData: (medicalCouncilData: medicalCouncilStruct) => void;
+  councilFile: any;
+  setCouncilFile: (file: any) => void;
+};
+
+const DoctorVerification: React.FC<props> = ({
+  medicalCouncilData,
+  setMedicalCouncilData,
+  councilFile,
+  setCouncilFile,
+}) => {
+  const doctorStep = useSelector((state: RootState) => state.doctorStep.value);
+  const dispatch = useDispatch();
   const verificationList = [
     "Certificate of Registration with the Maltese Medical Council OR Registration from the appropriate Professional Council",
     "Certificate of Good Standing (from the Maltese Medical Council - valid for 3 months from the date of issue). Doctors applying from overseas are to provide a Certificate of Good Standing issued from the most recent country of residence / practise (valid for 3 months from the date of issue) (only applicable for Medical Doctors)",
@@ -43,21 +65,38 @@ function DoctorVerification() {
           id="name"
           className="input-box md:w-[35rem]"
           placeholder="Medical council registration number"
+          value={medicalCouncilData.councilNumber}
+          onChange={(e) =>
+            setMedicalCouncilData({
+              ...medicalCouncilData,
+              councilNumber: e.currentTarget.value,
+            })
+          }
         />
       </div>
       <div className="input-group">
         <label className="input-label font-medium" htmlFor="name">
-        Area of Specialisation*
+          Area of Specialisation*
         </label>
         <input
           type={"text"}
           id="name"
           className="input-box md:w-[35rem]"
           placeholder="Enter Area of Specialisation"
+          value={medicalCouncilData.specialization}
+          onChange={(e) =>
+            setMedicalCouncilData({
+              ...medicalCouncilData,
+              specialization: e.currentTarget.value,
+            })
+          }
         />
       </div>
+      <button className="submit-btn" onClick={() => dispatch(updateStep(3))}>
+        Continue
+      </button>
     </div>
   );
-}
+};
 
 export default DoctorVerification;
