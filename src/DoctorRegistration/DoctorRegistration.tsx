@@ -202,15 +202,15 @@ const DoctorRegistration: React.FC = () => {
             return (
               <div
                 key={registrationStep.id}
-                className="flex space-x-2 px-2 py-3 shadow-lg rounded-md cursor-pointer border border-[#F4F4F4]"
+                className="flex space-x-2 px-2 py-3 shadow-lg rounded-md cursor-pointer border border-[#F4F4F4] dark:border-dark-input-border dark:bg-dark-card"
                 onClick={() => dispatch(updateStep(registrationStep.id - 1))}
               >
-                <div className="rounded-full p-2 bg-[#10916F] text-white w-10 h-10 text-center">
+                <div className="rounded-full p-2 bg-[#10916F] text-white w-10 h-10 text-center dark:bg-primary-yellow dark:text-black">
                   {registrationStep.step}
                 </div>
                 <div>
-                  <h5 className="font-semibold">{registrationStep.title}</h5>
-                  <p className="text-[#585858]">{registrationStep.subTitle}</p>
+                  <h5 className="font-semibold dark:text-white">{registrationStep.title}</h5>
+                  <p className="text-[#585858] dark:text-dark-muted">{registrationStep.subTitle}</p>
                 </div>
               </div>
             );

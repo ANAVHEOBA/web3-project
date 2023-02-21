@@ -62,8 +62,8 @@ const Preferences: React.FC<Props> = ({
   const [activeTab, setActiveTab] = useState<number>(0);
   return (
     <div className="form-group">
-      <h5 className="font-semibold text-2xl">Preferences</h5>
-      <p className="text-[#585858]">
+      <h5 className="font-semibold text-2xl dark:text-primary-yellow">Preferences</h5>
+      <p className="text-[#585858] dark:text-white">
         This can be edited later on from the account settings.
       </p>
       <div className="space-y-5">
@@ -71,12 +71,12 @@ const Preferences: React.FC<Props> = ({
           return (
             <div
               key={preferenceItem.id}
-              className={`px-2 py-2 border border-[#E6E9F4] rounded`}
+              className={`px-2 py-2 border border-[#E6E9F4] rounded dark:border-dark-input-border dark:bg-dark-blue-input`}
             >
-              <div className="flex justify-between">
+              <div className="flex justify-between dark:text-dark-muted">
                 <span>{preferenceItem.title}</span>
                 <AiOutlineRight
-                  className={`h-6 w-6 cursor-pointer ${
+                  className={`h-6 w-6 cursor-pointer dark:text-primary-yellow ${
                     activeTab === preferenceItem.id ? "rotate-90" : ""
                   }`}
                   onClick={() =>

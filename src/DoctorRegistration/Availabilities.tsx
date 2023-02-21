@@ -62,7 +62,7 @@ const Availabilities: React.FC<Props> = ({
   return (
     <div className="space-y-3 flex flex-col">
       <h5 className="font-semibold text-2xl">Add availability*</h5>
-      <p className="text-[#585858]">
+      <p className="text-[#585858] dark:text-white">
         Visitors will only be able to schedule appointments during available
         hours.
       </p>
@@ -133,7 +133,7 @@ const Availabilities: React.FC<Props> = ({
               <div
                 key={dayItem.key}
                 title={dayItem.day}
-                className="border rounded-md px-3 py-2 cursor-pointer"
+                className="border rounded-md px-3 py-2 cursor-pointer dark:border-dark-input-border dark:bg-dark-blue-input"
               >
                 {dayItem.shortDay}
               </div>

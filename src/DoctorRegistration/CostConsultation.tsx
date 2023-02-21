@@ -18,10 +18,10 @@ type Props = {
 const CostConsultation: React.FC<Props> = ({ preference, setPreference }) => {
   return (
     <div className="space-y-3  flex flex-col">
-      <h5 className="font-semibold text-2xl">
+      <h5 className="font-semibold text-2xl dark:text-white">
         What is the maximum cost perconsultation?*
       </h5>
-      <p className="text-[#585858]">
+      <p className="text-[#585858] dark:text-dark-muted">
         This can be edited later on from the preferences section.
       </p>
       <input

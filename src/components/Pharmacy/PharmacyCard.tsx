@@ -16,7 +16,7 @@ interface pharmacyStruct {
 
 function PharmacyCard(pharmacyData: pharmacyStruct) {
   return (
-    <div className="px-4 py-4 border border-[#f0f0f0] rounded space-y-2 flex flex-col md:flex-row justify-between">
+    <div className="px-4 py-4 border border-[#f0f0f0] rounded space-y-2 flex flex-col md:flex-row justify-between dark:border-dark-input-border dark:bg-dark-card">
       <div className="flex flex-col md:flex-row space-y-2 space-x-1 md:space-x-4">
         <div className="relative h-48 w-72 md:h-44 md:w-56">
           <Image
@@ -26,8 +26,8 @@ function PharmacyCard(pharmacyData: pharmacyStruct) {
             className="rounded-md"
           />
         </div>
-        <div className="flex flex-col space-y-2 text-[#757575]">
-          <h5 className="font-extrabold text-lg">{pharmacyData.name}</h5>
+        <div className="flex flex-col space-y-2 text-[#757575] dark:text-dark-muted">
+          <h5 className="font-extrabold text-lg dark:text-white dark:hover:text-primary-yellow">{pharmacyData.name}</h5>
           <div className="flex space-x-2 items-center">
             <FiPhoneCall className="h-6 w-6" />
             <span>{pharmacyData.phone}</span>
@@ -47,7 +47,7 @@ function PharmacyCard(pharmacyData: pharmacyStruct) {
         </div>
       </div>
       <div>
-        <button className="px-8 py-2 border-2 border-primary-blue text-primary-blue rounded-lg hover:bg-primary-blue hover:text-white transition transform ease-out duration-300">View Details</button>
+        <button className="px-8 py-2 border-2 border-primary-blue text-primary-blue rounded-lg hover:bg-primary-blue hover:text-white transition transform ease-out duration-300 dark:bg-primary-yellow dark:text-black dark:border-none">View Details</button>
       </div>
     </div>
   );

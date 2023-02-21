@@ -39,13 +39,13 @@ function BusinessHourTab() {
     },
   ];
   return (
-    <div className="px-3 md:px-10 mx-1 md:mx-56 py-5 border border-[#f0f0f0] rounded-lg">
+    <div className="px-3 md:px-10 mx-1 md:mx-56 py-5 border border-[#f0f0f0] rounded-lg dark:border-dark-input-border">
       <div className="">
         {businessHourList.map((hourSlot) => {
           return (
             <div key={hourSlot.id} className="flex justify-between">
-              <span className="text-black font-semibold">{hourSlot.day}</span>
-              <span className="text-[#757575]">{hourSlot.timeSlot}</span>
+              <span className="text-black font-semibold dark:text-dark-muted">{hourSlot.day}</span>
+              <span className="text-[#757575] dark:text-dark-muted">{hourSlot.timeSlot}</span>
             </div>
           );
         })}

@@ -17,7 +17,7 @@ interface doctorStruct {
 
 function LongDoctorCard(doctorData: doctorStruct) {
   return (
-    <div className="px-4 py-4 border border-[#f0f0f0] flex justify-between">
+    <div className="px-4 py-4 border border-[#f0f0f0] flex justify-between rounded-md dark:border-dark-input-border dark:bg-dark-card">
       <div className="flex space-x-2">
         <div className="relative h-32 w-32">
           <Image
@@ -28,9 +28,9 @@ function LongDoctorCard(doctorData: doctorStruct) {
           />
         </div>
         <div>
-          <h3>{doctorData.name}</h3>
-          <p>{doctorData.category}</p>
-          <div className="flex space-x-2 text-[#757575] items-center">
+          <h3 className="dark:text-white">{doctorData.name}</h3>
+          <p className="dark:text-dark-muted">{doctorData.category}</p>
+          <div className="flex space-x-2 text-[#757575] items-center dark:text-dark-muted">
             <GoLocation className="h-6 w-6" />
             <span> Newyork, USA</span>
           </div>
@@ -38,7 +38,7 @@ function LongDoctorCard(doctorData: doctorStruct) {
       </div>
       <div>
         <div className="space-y-2 items-center mx-auto md:mx-0">
-          <div className="space-y-2 text-[#4E4852]">
+          <div className="space-y-2 text-[#4E4852] dark:text-dark-muted">
             <div className="flex space-x-2 items-center">
               <GoThumbsup className="h-6 w-6" />
               <span>99%</span>
@@ -56,7 +56,7 @@ function LongDoctorCard(doctorData: doctorStruct) {
               <span>$100 per hour</span>
             </div>
           </div>
-          <button className="px-3 py-2 bg-primary-blue text-white rounded-md text-xl">
+          <button className="px-3 py-2 bg-primary-blue text-white rounded-md text-xl dark:bg-primary-yellow dark:text-black">
             Book Appointment
           </button>
         </div>

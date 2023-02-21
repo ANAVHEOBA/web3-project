@@ -33,13 +33,13 @@ const PersonalDetailsForm: React.FC<props> = ({
       <div className="flex w-full">
         <label
           htmlFor="dropzone-file"
-          className="flex flex-col items-center justify-center w-96 h-32 border-2 border-[#E6E9F4] border-dashed rounded-lg cursor-pointer bg-[#F5F6FA] hover:bg-gray-100"
+          className="flex flex-col items-center justify-center w-96 h-32 border-2 border-[#E6E9F4] border-dashed rounded-lg cursor-pointer bg-[#F5F6FA] dark:bg-dark-blue-input hover:bg-gray-100 dark:border-dark-input-border"
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span className="font-semibold">Click to upload</span>
+              <span className="font-semibold dark:text-dark-muted">Click to upload</span>
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
+            <p className="text-xs text-gray-500 dark:text-dark-muted">
               SVG, PNG, JPG or GIF (MAX. 800x400px)
             </p>
           </div>
@@ -188,7 +188,7 @@ const PersonalDetailsForm: React.FC<props> = ({
         />
       </div>
       <button
-        className="px-2 py-2 bg-primary-green text-white rounded-md"
+        className="submit-btn"
         onClick={() => dispatch(updateStep(1))}
       >
         Continue

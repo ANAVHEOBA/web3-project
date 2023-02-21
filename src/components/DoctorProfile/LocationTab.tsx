@@ -15,12 +15,12 @@ function LocationTab() {
     },
   ];
   return (
-    <div className="px-5 py-5 border border-[#f0f0f0] rounded-lg flex flex-col md:flex-row space-y-3 justify-between">
+    <div className="px-5 py-5 border border-[#f0f0f0] rounded-lg flex flex-col md:flex-row space-y-3 justify-between dark:border-dark-input-border">
       {/* Left - about */}
       <div className="space-y-3">
-        <h5 className="text-lg font-semibold">Smile Cute Dental Care Center</h5>
-        <p className="text-[#757575]">MDS - Periodontology and Oral Implantology, BDS</p>
-        <div className="flex items-center space-x-2 text-[#757575]">
+        <h5 className="text-lg font-semibold dark:text-white">Smile Cute Dental Care Center</h5>
+        <p className="text-[#757575] dark:text-dark-muted">MDS - Periodontology and Oral Implantology, BDS</p>
+        <div className="flex items-center space-x-2 text-[#757575] dark:text-dark-muted">
           <GoLocation className="h-6 w-6" />
           <span>2286 Sundown Lane, Austin, Texas 78749, USA</span>
         </div>

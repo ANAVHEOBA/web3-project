@@ -77,7 +77,7 @@ function Footer() {
   };
 
   return (
-    <footer className="py-10 px-5 bg-[#15558d] space-y-4">
+    <footer className="py-10 px-5 bg-[#15558d] space-y-4 dark:bg-dark-footer">
       <div className="gap-y-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <div>
           <FooterCol1 />

@@ -24,7 +24,7 @@ function DeskNavbar() {
   ];
   const { theme, setTheme } = useTheme();
   return (
-    <nav className="flex justify-between px-3 py-2 items-center border-b border-nav-border shadow">
+    <nav className="flex justify-between px-3 py-2 items-center border-b border-nav-border shadow dark:border-[#A0AABA2B]">
       <div className="relative h-16 w-16">
         <Image src={"/logo-no-background.svg"} alt={"DeDoctor"} fill />
       </div>
@@ -34,7 +34,7 @@ function DeskNavbar() {
             return (
               <li
                 key={navItem.id}
-                className="px-3 py-1 cursor-pointer hover:text-primary-green duration-300 transition transform ease-out dark:text-white dark:hover:text-[#FCAF31]"
+                className="px-3 py-1 cursor-pointer hover:text-primary-green duration-300 transition transform ease-out dark:text-white dark:hover:text-[#FCAF31] dark:font-semibold"
               >
                 {navItem.name}
               </li>

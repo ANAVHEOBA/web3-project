@@ -7,7 +7,7 @@ function FooterCol1() {
       <div className="relative h-24 w-36">
         <Image src={"/logo_white.png"} alt={"DeDoctor"} fill />
       </div>
-      <p className="text-white">
+      <p className="text-white dark:text-dark-muted">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias error
         adipisci debitis cum laborum voluptatibus sapiente quidem est mollitia
         iusto?

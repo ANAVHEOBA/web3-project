@@ -7,8 +7,8 @@ import { MdCallEnd, MdCall } from "react-icons/md";
 
 function VideoCall() {
   return (
-    <div className="px-5 py-5 border border-[#f0f0f0] m-5">
-      <div className="flex justify-between items-center border-b pb-2">
+    <div className="px-5 py-5 border border-[#f0f0f0] m-5 dark:border-dark-input-border dark:bg-dark-card">
+      <div className="flex justify-between items-center border-b pb-2 dark:border-dark-input-border">
         <div className="flex space-x-2 items-center">
           <div className="relative w-14 h-14">
             <Image
@@ -21,7 +21,7 @@ function VideoCall() {
             />
           </div>
           <div className="flex flex-col space-y-1">
-            <span>00089895dsgdsg09ff</span>
+            <span className="dark:text-white">00089895dsgdsg09ff</span>
             <span>Online</span>
           </div>
         </div>
@@ -29,7 +29,7 @@ function VideoCall() {
           <FiSettings className="h-6 w-6" />
         </div>
       </div>
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-10">
         <div className="relative h-64 w-96">
           <Image
             src={
@@ -45,7 +45,7 @@ function VideoCall() {
           <span>00:59</span>
         </div>
         <div className="flex space-x-2">
-          <div className="rounded-full text-center border p-3">
+          <div className="rounded-full text-center border p-3 ">
             <AiOutlineVideoCamera className="w-8 h-8" />
           </div>
           <div className="rounded-full text-center border p-3">

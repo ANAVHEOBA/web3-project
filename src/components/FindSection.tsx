@@ -27,8 +27,8 @@ function FindSection() {
     },
   ];
   return (
-    <div className="bg-[#f9f9f9]">
-      <p className="text-center text-3xl font-semibold text-[#272b41]">
+    <div className="bg-[#f9f9f9] dark:bg-[#030B29]">
+      <p className="text-center text-3xl font-semibold text-[#272b41] dark:text-white">
         What are you looking for?
       </p>
       <div className="grid grid-cols-1 gap-y-4 md:grid-cols-2 lg:grid-cols-3 px-12 md:mx-20 mt-5">

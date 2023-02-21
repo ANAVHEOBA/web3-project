@@ -18,15 +18,15 @@ body{
   }
 
   .input-box{
-    @apply bg-[#F5F6FA] border border-[#E6E9F4] h-10 rounded-md text-[#354052] px-1 py-1 focus:border-[#09E5AB] focus:outline-none focus:bg-white  md:w-96 placeholder:text-[#8E8E8F]
+    @apply bg-[#F5F6FA] border border-[#E6E9F4] h-10 rounded-md text-[#354052] px-1 py-1 focus:border-[#09E5AB] focus:outline-none focus:bg-white  md:w-96 placeholder:text-[#8E8E8F] dark:border-dark-input-border dark:bg-dark-blue-input
   }
 
   .form-group{
-    @apply space-y-2 border border-[#E6E9F4] px-5 py-5 rounded-md shadow-input-box
+    @apply space-y-2 border border-[#E6E9F4] px-5 py-5 rounded-md shadow-input-box dark:bg-dark-card dark:border-dark-input-border dark:shadow-none dark:placeholder-dark-placeholder dark:text-dark-input-text
   }
 
   .input-label{
-      @apply font-medium
+      @apply font-medium dark:text-dark-muted
   }
 
   .input-group{
@@ -34,7 +34,7 @@ body{
   }
 
   .submit-btn{
-    @apply px-5 py-3 bg-primary-green text-white rounded-md
+    @apply px-5 py-3 bg-primary-green text-white rounded-md dark:bg-primary-yellow dark:text-black
   }
  
 }

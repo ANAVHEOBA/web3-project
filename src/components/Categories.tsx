@@ -56,8 +56,8 @@ function Categories() {
   ];
   return (
     <div className="py-10 flex flex-col space-y-3">
-      <p className="text-center heading">Clinic and Specialities</p>
-      <p className="text-center sub-heading">
+      <p className="text-center heading dark:text-white">Clinic and Specialities</p>
+      <p className="text-center sub-heading dark:text-dark-muted">
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, hic.
       </p>
       <div className="mx-10 md:mx-28">
@@ -90,7 +90,7 @@ function Categories() {
                 >
                   <div
                     key={categoryItem.id}
-                    className="p-8 shadow-light rounded-full items-center"
+                    className="p-8 shadow-light rounded-full items-center dark:border dark:border-dark-input-border dark:bg-dark-card"
                   >
                     <div className="relative w-20 h-20">
                       <Image
@@ -100,7 +100,7 @@ function Categories() {
                       />
                     </div>
                   </div>
-                  <span>{categoryItem.title}</span>
+                  <span className="dark:text-dark-muted">{categoryItem.title}</span>
                 </div>
               </SwiperSlide>
             );

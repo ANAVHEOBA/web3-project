@@ -22,7 +22,7 @@ function FindCard(findItem: findStruct) {
       </div>
       <div className="absolute top-[50%] left-[10%]">
         <p className="text-white text-2xl font-semibold">{findItem.title}</p>
-        <button className="bg-primary-blue font-semibold px-2 py-2 text-white">
+        <button className="bg-primary-blue font-semibold px-2 py-2 text-white rounded-md dark:bg-primary-yellow dark:text-black">
           {findItem.btnName}
         </button>
       </div>

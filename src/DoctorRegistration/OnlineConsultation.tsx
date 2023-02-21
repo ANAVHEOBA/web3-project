@@ -41,10 +41,10 @@ const OnlineConsultation: React.FC<Props> = ({ preference, setPreference }) => {
   ];
   return (
     <div className="space-y-3  flex flex-col">
-      <h5 className="font-semibold text-2xl">
+      <h5 className="font-semibold text-2xl dark:text-white">
         Which are your preferred means of online consultation?
       </h5>
-      <p className="text-[#585858]">
+      <p className="text-[#585858] dark:text-dark-muted">
         You can select more than one from the below. These will show up as
         options for the patient when booking an appointment.
       </p>
@@ -53,7 +53,7 @@ const OnlineConsultation: React.FC<Props> = ({ preference, setPreference }) => {
           return (
             <div
               key={callTypeItem.key}
-              className="flex space-x-2 px-2 py-2 border border-[#E6E9F4] rounded-md"
+              className="flex space-x-2 px-2 py-2 border border-[#E6E9F4] rounded-md dark:border-dark-input-border"
             >
               <callTypeItem.icon className="h-6 w-6" />
               <span>{callTypeItem.title}</span>
@@ -61,7 +61,7 @@ const OnlineConsultation: React.FC<Props> = ({ preference, setPreference }) => {
           );
         })}
       </div>
-      <p className="text-[#585858]">
+      <p className="text-[#585858] dark:text-dark-muted">
         Choose your preferred language for Audio, Video calls and chat. You can
         select more than one option.
       </p>

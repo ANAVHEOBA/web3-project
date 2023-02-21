@@ -58,8 +58,8 @@ const PreferencePharmacy: React.FC<props> = ({
   ];
   return (
     <div className="form-group">
-      <h5 className="font-semibold text-2xl">Add availability*</h5>
-      <p className="text-[#585858]">
+      <h5 className="font-semibold text-2xl dark:text-primary-yellow">Add availability*</h5>
+      <p className="text-[#585858] dark:text-white">
         Visitors will only be able to schedule appointments during available
         hours.
       </p>
@@ -73,7 +73,7 @@ const PreferencePharmacy: React.FC<props> = ({
               <div
                 key={dayItem.key}
                 title={dayItem.day}
-                className="border rounded-md px-3 py-2 cursor-pointer"
+                className="border rounded-md px-3 py-2 cursor-pointer dark:border-dark-input-border"
               >
                 {dayItem.shortDay}
               </div>

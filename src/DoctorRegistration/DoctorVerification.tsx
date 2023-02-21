@@ -33,8 +33,8 @@ const DoctorVerification: React.FC<props> = ({
   ];
   return (
     <div className="form-group">
-      <h5 className="font-semibold text-2xl">Doctor Verification</h5>
-      <p className="text-[#585858]">
+      <h5 className="font-semibold text-2xl dark:text-primary-yellow">Doctor Verification</h5>
+      <p className="text-[#585858] dark:text-white">
         Please provide the details below and attach copies for your:
       </p>
       <ul className="space-y-2 list-disc pl-8">
@@ -45,7 +45,7 @@ const DoctorVerification: React.FC<props> = ({
       <div className="flex w-full">
         <label
           htmlFor="dropzone-file"
-          className="flex flex-col items-center justify-center w-96 h-32 border-2 border-[#E6E9F4] border-dashed rounded-lg cursor-pointer bg-[#F5F6FA] hover:bg-gray-100"
+          className="flex flex-col items-center justify-center w-96 h-32 border-2 border-[#E6E9F4] border-dashed rounded-lg cursor-pointer bg-[#F5F6FA] hover:bg-gray-100 dark:bg-dark-blue-input dark:border-dark-input-border"
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             <GrDocument className="w-10 h-10 mb-3" />

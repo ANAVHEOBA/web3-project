@@ -4,14 +4,14 @@ import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import "@rainbow-me/rainbowkit/styles.css";
-import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { getDefaultWallets, RainbowKitProvider, lightTheme, darkTheme } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import { mainnet, polygon, optimism, arbitrum, Chain } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { Provider } from "react-redux";
 import { store } from "@/store";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
 
 import {
   getHuddleClient,
@@ -68,8 +68,11 @@ const wagmiClient = createClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const { theme } = useTheme();
+  console.log(theme);
+  
   return (
-    <div className="dark:bg-[#030B29]">
+    <div className="dark:bg-[#030B29] dark:text-dark-muted">
       <Head>
         <title>DeDoctor</title>
         <meta
@@ -120,7 +123,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <HuddleClientProvider value={huddleClient}>
           <Provider store={store}>
             <WagmiConfig client={wagmiClient}>
-              <RainbowKitProvider chains={chains}>
+              <RainbowKitProvider chains={chains} theme={theme === 'light'? lightTheme() : darkTheme()} >
                 <Navbar />
                 <Component {...pageProps} />
                 <Footer />
