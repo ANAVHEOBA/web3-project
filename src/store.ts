@@ -1,12 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import doctorStepSlice from './features/doctorStepSlice'
-import doctorRegistrationSlice from './features/doctorRegistrationSlice'
-
+import pharmacyStepSlice from './features/pharmacyStepSlice'
 
 export const store = configureStore({
   reducer: {
     doctorStep: doctorStepSlice,
-    doctorRegistration: doctorRegistrationSlice,
+    pharmacyStep: pharmacyStepSlice
   },
   
 })

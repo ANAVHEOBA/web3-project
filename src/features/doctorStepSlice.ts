@@ -22,7 +22,6 @@ export const doctorStepSlice = createSlice({
   },
 })
 
-// Action creators are generated for each case reducer function
 export const { updateStep } = doctorStepSlice.actions
 
 export const  activeDoctorStep = (state:any) => state.doctorStep;

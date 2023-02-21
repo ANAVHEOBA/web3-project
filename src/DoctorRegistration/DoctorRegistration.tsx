@@ -8,10 +8,17 @@ import { updateStep } from "@/features/doctorStepSlice";
 import { RootState } from "@/store";
 import useIPFS from "@/hooks/storeIpfs";
 import useSmartContract from "@/hooks/useSmartContract";
-import { useContract, useSigner, useProvider, useContractRead } from 'wagmi'
+import {
+  useContract,
+  useSigner,
+  useProvider,
+  useContractRead,
+  useContractWrite,
+} from "wagmi";
 import deDoctorABI from "@/constants/constants";
 import { ethers } from "ethers";
-
+import { BigNumber } from "ethers";
+import { useAccount } from 'wagmi'
 
 
 type personalData = {
@@ -84,44 +91,50 @@ const DoctorRegistration: React.FC = () => {
   });
   // const {contractData, isLoading, serverError} = useSmartContract();
   const { data: signer, isError, isLoading } = useSigner();
-  const provider = useProvider()
+  const provider = useProvider();
 
   const contract = useContract({
     address: process.env.DEDOCTOR_SMART_CONTRACT || "",
     abi: deDoctorABI,
     signerOrProvider: signer,
-  })
-  const { data, isRefetching, isSuccess, refetch } = useContractRead({
-    address : "0xC9aBeA6E1e4294fC2653180F7eD3AD001427c692",
+  });
+  // const { data, isRefetching, isSuccess, refetch } = useContractRead({
+  //   address: "0xC9aBeA6E1e4294fC2653180F7eD3AD001427c692",
+  //   abi: deDoctorABI,
+  //   functionName: "getAllDoctors",
+  // });
+
+  const { write, data, error, isSuccess } =
+  useContractWrite({
+    mode: 'recklesslyUnprepared',
+    address: '0xC9aBeA6E1e4294fC2653180F7eD3AD001427c692',
     abi: deDoctorABI,
-    functionName: 'getAllDoctors',
+    functionName: 'registerDoctor',
+    chainId: 8081,
   })
   const submitIpfs = async () => {
     console.log("start");
-    console.log(data);
-    
-    
+    const link = await useIPFS(
+      personalData,
+      userImage,
+      identificationData,
+      identificationDoc,
+      medicalCouncilData,
+      councilFile,
+      preference
+    );
+    write?.({ recklesslySetUnpreparedArgs: ["Nayan","Male","Rajkot","English",BigNumber.from(100), "www.google.com"] })
+    console.log("End");
+
     // let deDoctorContract = new ethers.Contract(
     //   process.env.DEDOCTOR_SMART_CONTRACT || "",
     //   deDoctorABI,
     //   signer || provider
     // );
     console.log(contract);
-    
-    
-    
-    // const link = await useIPFS(
-    //   personalData,
-    //   userImage,
-    //   identificationData,
-    //   identificationDoc,
-    //   medicalCouncilData,
-    //   councilFile,
-    //   preference
-    // );
+
     // const contract = useContract();
     // console.log(contract);
-    
   };
 
   const registrationSteps = [
@@ -172,7 +185,11 @@ const DoctorRegistration: React.FC = () => {
       title: "Preferences",
       subTitle: "Setup Your Preferences for your Account",
       component: (
-        <Preferences preference={preference} setPreference={setPreference} submitIpfs={submitIpfs} />
+        <Preferences
+          preference={preference}
+          setPreference={setPreference}
+          submitIpfs={submitIpfs}
+        />
       ),
       step: 4,
     },

@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "@/store";
-import { updateStep } from "@/features/doctorStepSlice";
+import { pharmacyUpdateStep } from "@/features/pharmacyStepSlice";
+import React from "react";
+import { useDispatch } from "react-redux";
 
-type personalData = {
+type pharmacyStruct = {
   name: string;
-  gender: string;
-  dob: string;
   address: string;
   city: string;
   state: string;
@@ -14,19 +11,18 @@ type personalData = {
 };
 
 type props = {
-  personalData: personalData;
-  setPersonalData: (personalData: personalData) => void;
-  userImage: any;
-  setUserImage: (image: any) => void;
+  pharmacyPersonaData: pharmacyStruct;
+  setPharmacyPersonalData: (pharmacyPersonaData: pharmacyStruct) => void;
+  pharmacyImage: any;
+  setPharmacyImage: (pharmacyImage: any) => void;
 };
 
-const PersonalDetailsForm: React.FC<props> = ({
-  personalData,
-  setPersonalData,
-  userImage,
-  setUserImage,
+const PharmacyPersonal: React.FC<props> = ({
+  pharmacyPersonaData,
+  setPharmacyPersonalData,
+  pharmacyImage,
+  setPharmacyImage,
 }) => {
-  const doctorStep = useSelector((state: RootState) => state.doctorStep.value);
   const dispatch = useDispatch();
   return (
     <div className="form-group">
@@ -49,68 +45,31 @@ const PersonalDetailsForm: React.FC<props> = ({
             className="hidden"
             name="image"
             onChange={(e) =>
-              setUserImage(e.currentTarget.files && e.currentTarget.files[0])
+              setPharmacyImage(
+                e.currentTarget.files && e.currentTarget.files[0]
+              )
             }
           />
         </label>
       </div>
       <div className="input-group">
         <label className="input-label" htmlFor="name">
-          Legal Name *
+          Pharmacy Legal Name *
         </label>
         <input
           type={"text"}
           name="name"
           id="name"
-          value={personalData.name}
+          value={pharmacyPersonaData.name}
           onChange={(e) =>
-            setPersonalData({ ...personalData, name: e.currentTarget.value })
+            setPharmacyPersonalData({
+              ...pharmacyPersonaData,
+              name: e.currentTarget.value,
+            })
           }
           className="input-box"
-          placeholder="Enter Name"
+          placeholder="Enter Pharmacy Name"
         />
-      </div>
-      <div className="flex space-x-2">
-        <div className="input-group">
-          <label className="input-label" htmlFor="gender">
-            Gender *
-          </label>
-          <select
-            className="input-box"
-            placeholder="Select Gender"
-            name="gender"
-            id="gender"
-            value={personalData.gender}
-            onChange={(e) =>
-              setPersonalData({
-                ...personalData,
-                gender: e.currentTarget.value,
-              })
-            }
-          >
-            <option value={"male"}>Male</option>
-            <option value={"female"}>Female</option>
-          </select>
-        </div>
-        <div className="input-group">
-          <label className="input-label" htmlFor="dob">
-            Date of Birth *
-          </label>
-          <input
-            type={"date"}
-            id="dob"
-            name="dob"
-            className="input-box"
-            placeholder="Date of Birth"
-            value={personalData.dob}
-            onChange={(e) =>
-              setPersonalData({
-                ...personalData,
-                dob: e.currentTarget.value,
-              })
-            }
-          />
-        </div>
       </div>
       <div className="input-group">
         <label className="input-label" htmlFor="address">
@@ -121,10 +80,10 @@ const PersonalDetailsForm: React.FC<props> = ({
           name="address"
           className="input-box md:w-[30rem]"
           placeholder="Enter Address"
-          value={personalData.address}
+          value={pharmacyPersonaData.address}
           onChange={(e) =>
-            setPersonalData({
-              ...personalData,
+            setPharmacyPersonalData({
+              ...pharmacyPersonaData,
               address: e.currentTarget.value,
             })
           }
@@ -141,10 +100,10 @@ const PersonalDetailsForm: React.FC<props> = ({
             name="city"
             className="input-box"
             placeholder="City"
-            value={personalData.city}
+            value={pharmacyPersonaData.city}
             onChange={(e) =>
-              setPersonalData({
-                ...personalData,
+              setPharmacyPersonalData({
+                ...pharmacyPersonaData,
                 city: e.currentTarget.value,
               })
             }
@@ -160,10 +119,10 @@ const PersonalDetailsForm: React.FC<props> = ({
             name="state"
             className="input-box"
             placeholder="State"
-            value={personalData.state}
+            value={pharmacyPersonaData.state}
             onChange={(e) =>
-              setPersonalData({
-                ...personalData,
+              setPharmacyPersonalData({
+                ...pharmacyPersonaData,
                 state: e.currentTarget.value,
               })
             }
@@ -172,16 +131,16 @@ const PersonalDetailsForm: React.FC<props> = ({
       </div>
       <div className="input-group">
         <label className="input-label" htmlFor="about">
-          About You *
+          About Pharmacy *
         </label>
         <textarea
           name="about"
           id="about"
           className="input-box md:w-[30rem] h-[6rem]"
-          value={personalData.about}
+          value={pharmacyPersonaData.about}
           onChange={(e) =>
-            setPersonalData({
-              ...personalData,
+            setPharmacyPersonalData({
+              ...pharmacyPersonaData,
               about: e.currentTarget.value,
             })
           }
@@ -189,7 +148,7 @@ const PersonalDetailsForm: React.FC<props> = ({
       </div>
       <button
         className="px-2 py-2 bg-primary-green text-white rounded-md"
-        onClick={() => dispatch(updateStep(1))}
+        onClick={() => dispatch(pharmacyUpdateStep(1))}
       >
         Continue
       </button>
@@ -197,4 +156,4 @@ const PersonalDetailsForm: React.FC<props> = ({
   );
 };
 
-export default PersonalDetailsForm;
+export default PharmacyPersonal;
