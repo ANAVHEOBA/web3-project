@@ -4,8 +4,12 @@ import { AiOutlineRight } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { GoLocation } from "react-icons/go";
 import { HiLocationMarker } from "react-icons/hi";
+import { useRouter } from "next/router";
 
 function PharmacyGeneral() {
+  const router = useRouter();
+  const { pharmacyId } = router.query;
+  console.log(pharmacyId);
   return (
     <div className="flex flex-col md:flex-row space-y-3 justify-between px-5 py-5 border border-[#f0f0f0] rounded-lg dark:border-dark-input-border dark:bg-dark-card">
       {/* Left Side Profile general */}

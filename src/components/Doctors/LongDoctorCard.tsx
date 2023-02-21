@@ -3,6 +3,8 @@ import React from "react";
 import { BiChat, BiMoney } from "react-icons/bi";
 import { BsBookmark, BsChat, BsFillCameraVideoOffFill, BsTelephoneFill } from "react-icons/bs";
 import { GoLocation, GoThumbsup } from "react-icons/go";
+import { useRouter } from "next/router";
+
 
 interface doctorStruct {
   id: number;
@@ -16,6 +18,7 @@ interface doctorStruct {
 }
 
 function LongDoctorCard(doctorData: doctorStruct) {
+  const router = useRouter();
   return (
     <div className="px-4 py-4 border border-[#f0f0f0] flex justify-between rounded-md dark:border-dark-input-border dark:bg-dark-card">
       <div className="flex space-x-2">
@@ -28,7 +31,7 @@ function LongDoctorCard(doctorData: doctorStruct) {
           />
         </div>
         <div>
-          <h3 className="dark:text-white">{doctorData.name}</h3>
+          <h3 className="dark:text-white cursor-pointer hover:text-primary-green duration-300 transition transform ease-out" onClick={() => router.push(`/doctor/${doctorData.id}`)}>{doctorData.name}</h3>
           <p className="dark:text-dark-muted">{doctorData.category}</p>
           <div className="flex space-x-2 text-[#757575] items-center dark:text-dark-muted">
             <GoLocation className="h-6 w-6" />

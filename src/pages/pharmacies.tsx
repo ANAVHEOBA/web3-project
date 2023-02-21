@@ -2,7 +2,7 @@ import Pharmacy from "@/components/Pharmacy/Pharmacy";
 import PharmacyCard from "@/components/Pharmacy/PharmacyCard";
 import React from "react";
 
-function pharmacy() {
+function pharmacies() {
   
   return (
     <div>
@@ -11,4 +11,4 @@ function pharmacy() {
   );
 }
 
-export default pharmacy;
+export default pharmacies;

@@ -3,6 +3,7 @@ import React from "react";
 import { useTheme } from "next-themes";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { MdOutlineDarkMode, MdLightMode } from "react-icons/md";
+import Link from "next/link";
 
 function DeskNavbar() {
   const navItemList = [
@@ -13,13 +14,23 @@ function DeskNavbar() {
     },
     {
       id: 2,
-      name: "Doctors",
-      url: "/",
+      name: "Doctor Register",
+      url: "/doctor_registration",
     },
     {
       id: 3,
+      name: "Doctors",
+      url: "/doctors",
+    },
+    {
+      id: 4,
+      name: "Pharmacy Register",
+      url: "/register_pharmacy",
+    },
+    {
+      id: 4,
       name: "Pharmacy",
-      url: "/",
+      url: "/pharmacies",
     },
   ];
   const { theme, setTheme } = useTheme();
@@ -32,11 +43,13 @@ function DeskNavbar() {
         <ul className="flex">
           {navItemList.map((navItem) => {
             return (
-              <li
-                key={navItem.id}
-                className="px-3 py-1 cursor-pointer hover:text-primary-green duration-300 transition transform ease-out dark:text-white dark:hover:text-[#FCAF31] dark:font-semibold"
-              >
-                {navItem.name}
+              <li key={navItem.id}>
+                <Link
+                  href={navItem.url}
+                  className="px-3 py-1 cursor-pointer hover:text-primary-green duration-300 transition transform ease-out dark:text-white dark:hover:text-[#FCAF31] dark:font-semibold"
+                >
+                  {navItem.name}
+                </Link>
               </li>
             );
           })}
