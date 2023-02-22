@@ -14,9 +14,7 @@ export const doctorStepSlice = createSlice({
   initialState,
   reducers: {
     
-    updateStep: (state, action: PayloadAction<number>) => {
-      console.log(action.payload);
-      
+    updateStep: (state, action: PayloadAction<number>) => {  
       state.value = action.payload
     },
   },

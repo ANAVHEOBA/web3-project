@@ -18,8 +18,8 @@ const useSmartContract = () => {
           deDoctorABI,
           signer || undefined
         );
-        console.log(signer);
-        
+
+
         setContractData(contract);
         setIsLoading(false);
       } catch (error: any) {

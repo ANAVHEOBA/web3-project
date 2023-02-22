@@ -35,7 +35,7 @@ function LongDoctorCard(doctorData: doctorStruct) {
           <p className="dark:text-dark-muted">{doctorData.category}</p>
           <div className="flex space-x-2 text-[#757575] items-center dark:text-dark-muted">
             <GoLocation className="h-6 w-6" />
-            <span> Newyork, USA</span>
+            <span> {doctorData.address}</span>
           </div>
         </div>
       </div>
@@ -52,11 +52,11 @@ function LongDoctorCard(doctorData: doctorStruct) {
             </div>
             <div className="flex space-x-2 items-center">
               <GoLocation className="h-6 w-6" />
-              <span>Newyork, USA</span>
+              <span>{doctorData.address}, USA</span>
             </div>
             <div className="flex space-x-2 items-center">
               <BiMoney className="h-6 w-6" />
-              <span>$100 per hour</span>
+              <span><span className="font-semibold">{doctorData.chargeStart}</span>SH per hour</span>
             </div>
           </div>
           <button className="px-3 py-2 bg-primary-blue text-white rounded-md text-xl dark:bg-primary-yellow dark:text-black">

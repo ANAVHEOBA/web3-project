@@ -10,34 +10,30 @@ import {
 import { BiMoney, BiChat } from "react-icons/bi";
 import { useRouter } from "next/router";
 
-function ProfileGeneral() {
-  const router = useRouter();
-  const { id } = router.query;
-  console.log(id);
+type props ={
+  doctorData: any
+}
+
+const ProfileGeneral: React.FC<any> = (doctorData) => {
+
   return (
     <div className="flex flex-col md:flex-row space-y-3 justify-between px-5 py-5 border border-[#f0f0f0] rounded-lg dark:border-dark-input-border dark:bg-dark-card">
       {/* Left Side Profile general */}
       <div className="flex flex-col md:flex-row space-x-2 mx-auto md:mx-0">
         <div className="relative h-48 w-48">
-          <Image
-            src={
-              "https://doccure.dreamguystech.com/react/template/7058680646be673ef70f79e43f408408.jpg"
-            }
-            alt={"Nayan"}
-            fill
-          />
+          <Image src={doctorData.doctorData.image} alt={"Nayan"} fill />
         </div>
         <div className="space-y-2">
           <h5 className="text-lg font-medium text-[#272b41] dark:text-white">
-            Dr. Darren Elder
+            {doctorData.doctorData.name}
           </h5>
           <p className="text-[#757575] dark:text-dark-muted">
-            BDS, MDS - Oral and Maxillofacial Surgery
+            {doctorData.doctorData.specialization}
           </p>
           <p className="text-primary-blue dark:text-primary-yellow">Dentist</p>
           <div className="flex space-x-2 text-[#757575] items-center dark:text-dark-muted">
             <GoLocation className="h-6 w-6" />
-            <span> Newyork, USA</span>
+            <span> {doctorData.doctorData.address}</span>
           </div>
         </div>
       </div>
@@ -55,11 +51,16 @@ function ProfileGeneral() {
           </div>
           <div className="flex space-x-2 items-center">
             <GoLocation className="h-6 w-6" />
-            <span>Newyork, USA</span>
+            <span>
+              {doctorData.doctorData.city}, {doctorData.doctorData.state}
+            </span>
           </div>
           <div className="flex space-x-2 items-center">
             <BiMoney className="h-6 w-6" />
-            <span>$100 per hour</span>
+            <span>
+              <span className="font-semibold">{doctorData.doctorData.chargeStart}</span> SH
+              per hour
+            </span>
           </div>
         </div>
         <div className="flex space-x-2 text-[#272b41]">
@@ -76,10 +77,12 @@ function ProfileGeneral() {
             <BsFillCameraVideoFill className="h-5 w-5" />
           </div>
         </div>
-        <button className="px-3 py-3 bg-primary-blue text-white rounded-md text-xl font-medium dark:bg-primary-yellow dark:text-black">Book Appointment</button>
+        <button className="px-3 py-3 bg-primary-blue text-white rounded-md text-xl font-medium dark:bg-primary-yellow dark:text-black">
+          Book Appointment
+        </button>
       </div>
     </div>
   );
-}
+};
 
 export default ProfileGeneral;

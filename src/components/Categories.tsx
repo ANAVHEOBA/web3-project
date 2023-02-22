@@ -64,8 +64,6 @@ function Categories() {
         <Swiper
           spaceBetween={50}
           slidesPerView={6}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
           breakpoints={{
             360: {
               slidesPerView: 2,

@@ -69,7 +69,6 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   const { theme } = useTheme();
-  console.log(theme);
   
   return (
     <div className="dark:bg-[#030B29] dark:text-dark-muted">

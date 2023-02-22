@@ -18,8 +18,7 @@ import {
 import deDoctorABI from "@/constants/constants";
 import { ethers } from "ethers";
 import { BigNumber } from "ethers";
-import { useAccount } from 'wagmi'
-
+import { useAccount } from "wagmi";
 
 type personalData = {
   name: string;
@@ -52,6 +51,7 @@ type preferenceStruct = {
 };
 
 const DoctorRegistration: React.FC = () => {
+  const { address } = useAccount();
   const doctorStep = useSelector((state: RootState) => state.doctorStep.value);
   const dispatch = useDispatch();
   // Personal Data
@@ -104,17 +104,16 @@ const DoctorRegistration: React.FC = () => {
   //   functionName: "getAllDoctors",
   // });
 
-  const { write, data, error, isSuccess } =
-  useContractWrite({
-    mode: 'recklesslyUnprepared',
-    address: '0xC9aBeA6E1e4294fC2653180F7eD3AD001427c692',
+  const { write, data, error, isSuccess } = useContractWrite({
+    mode: "recklesslyUnprepared",
+    address: "0x139825F987F8a6E6980AC1BDf9D5f9046BE00361",
     abi: deDoctorABI,
-    functionName: 'registerDoctor',
+    functionName: "registerDoctor",
     chainId: 8081,
-  })
+  });
+  
   const submitIpfs = async () => {
-    console.log("start");
-    const link = await useIPFS(
+    const link : any = await useIPFS(
       personalData,
       userImage,
       identificationData,
@@ -123,18 +122,28 @@ const DoctorRegistration: React.FC = () => {
       councilFile,
       preference
     );
-    write?.({ recklesslySetUnpreparedArgs: ["Nayan","Male","Rajkot","English",BigNumber.from(100), "www.google.com"] })
-    console.log("End");
+    const price = await ethers.utils.parseUnits(preference.minAmount.toString(), "ether");
+    await write?.({
+      recklesslySetUnpreparedArgs: [
+        personalData.name,
+        personalData.gender,
+        personalData.city,
+        preference.language,
+        address,
+        price,
+        link,
+      ],
+    });
+
+    
 
     // let deDoctorContract = new ethers.Contract(
     //   process.env.DEDOCTOR_SMART_CONTRACT || "",
     //   deDoctorABI,
     //   signer || provider
     // );
-    console.log(contract);
 
     // const contract = useContract();
-    // console.log(contract);
   };
 
   const registrationSteps = [
@@ -209,8 +218,12 @@ const DoctorRegistration: React.FC = () => {
                   {registrationStep.step}
                 </div>
                 <div>
-                  <h5 className="font-semibold dark:text-white">{registrationStep.title}</h5>
-                  <p className="text-[#585858] dark:text-dark-muted">{registrationStep.subTitle}</p>
+                  <h5 className="font-semibold dark:text-white">
+                    {registrationStep.title}
+                  </h5>
+                  <p className="text-[#585858] dark:text-dark-muted">
+                    {registrationStep.subTitle}
+                  </p>
                 </div>
               </div>
             );

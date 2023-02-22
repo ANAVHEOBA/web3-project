@@ -103,8 +103,6 @@ function BookDoctor() {
               spaceBetween: 10,
             },
           }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
         >
           {doctorList.map((doctorItem) => {
             return (
