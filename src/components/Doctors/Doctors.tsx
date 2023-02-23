@@ -19,7 +19,7 @@ function Doctors() {
   }
 
   const deDoctorList = useContractRead({
-    address: "0x139825F987F8a6E6980AC1BDf9D5f9046BE00361",
+    address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
     abi: deDoctorABI,
     functionName: "getAllDoctors",
   });

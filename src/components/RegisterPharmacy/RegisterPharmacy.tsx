@@ -1,7 +1,10 @@
+import deDoctorABI from "@/constants/constants";
 import { pharmacyUpdateStep } from "@/features/pharmacyStepSlice";
+import usePharmacyIPFs from "@/hooks/pharmacyStoreIpfs";
 import { RootState } from "@/store";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAccount, useContractWrite } from "wagmi";
 import OwnerDetails from "./OwnerDetails";
 import PharmacyPersonal from "./PharmacyPersonal";
 import PharmacyVerification from "./PharmacyVerification";
@@ -36,6 +39,15 @@ type pharmacyPreference = {
 };
 
 function RegisterPharmacy() {
+  const { address } = useAccount();
+  const { write, data, error, isSuccess } = useContractWrite({
+    mode: "recklesslyUnprepared",
+    address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
+    abi: deDoctorABI,
+    functionName: "registerPharmacy",
+    chainId: 8081,
+  });
+
   const doctorStep = useSelector(
     (state: RootState) => state.pharmacyStep.value
   );
@@ -75,10 +87,30 @@ function RegisterPharmacy() {
       startTime: "",
       endTime: "",
     });
-    const onSubmitPharmacy = () => {
-      console.log("Submit Phamacy");
-      
-    }
+  const onSubmitPharmacy = async () => {
+    console.log("Submit Phamacy");
+    const link: any = await usePharmacyIPFs(
+      pharmacyPersonaData,
+      pharmacyImage,
+      pharmacyOwnerData,
+      pharmacyOwnerImage,
+      pharmacyVerificationData,
+      pharmacyVerificationDoc,
+      pharmacyPreferenceData
+    );
+    const dataPharmacy : any = await write?.({
+      recklesslySetUnpreparedArgs: [
+        pharmacyPersonaData.name,
+        pharmacyPersonaData.city,
+        pharmacyOwnerData.name,
+        address,
+        pharmacyVerificationData.councilNumber,
+        link,
+      ],
+    });
+    console.log("End");
+  };
+
   const registrationSteps = [
     {
       id: 1,
@@ -154,8 +186,12 @@ function RegisterPharmacy() {
                   {registrationStep.step}
                 </div>
                 <div>
-                  <h5 className="font-semibold dark:text-white">{registrationStep.title}</h5>
-                  <p className="text-[#585858] dark:text-dark-muted">{registrationStep.subTitle}</p>
+                  <h5 className="font-semibold dark:text-white">
+                    {registrationStep.title}
+                  </h5>
+                  <p className="text-[#585858] dark:text-dark-muted">
+                    {registrationStep.subTitle}
+                  </p>
                 </div>
               </div>
             );

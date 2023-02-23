@@ -7,17 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateStep } from "@/features/doctorStepSlice";
 import { RootState } from "@/store";
 import useIPFS from "@/hooks/storeIpfs";
-import useSmartContract from "@/hooks/useSmartContract";
 import {
   useContract,
   useSigner,
   useProvider,
-  useContractRead,
   useContractWrite,
 } from "wagmi";
 import deDoctorABI from "@/constants/constants";
 import { ethers } from "ethers";
-import { BigNumber } from "ethers";
 import { useAccount } from "wagmi";
 
 type personalData = {
@@ -106,7 +103,7 @@ const DoctorRegistration: React.FC = () => {
 
   const { write, data, error, isSuccess } = useContractWrite({
     mode: "recklesslyUnprepared",
-    address: "0x139825F987F8a6E6980AC1BDf9D5f9046BE00361",
+    address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
     abi: deDoctorABI,
     functionName: "registerDoctor",
     chainId: 8081,

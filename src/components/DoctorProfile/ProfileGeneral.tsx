@@ -15,6 +15,7 @@ type props ={
 }
 
 const ProfileGeneral: React.FC<any> = (doctorData) => {
+console.log();
 
   return (
     <div className="flex flex-col md:flex-row space-y-3 justify-between px-5 py-5 border border-[#f0f0f0] rounded-lg dark:border-dark-input-border dark:bg-dark-card">

@@ -51,7 +51,9 @@ const DoctorProfile: React.FC =() => {
   return (
     <div className="px-5 py-5 m-5">
       <div>
-        <ProfileGeneral doctorData={doctorData} />
+        {
+         doctorData && <ProfileGeneral doctorData={doctorData} />
+        }
       </div>
       <div>
         <ProfileTab />
