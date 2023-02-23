@@ -32,7 +32,7 @@ function SelectRegister() {
       description:
         "Connect with your doctors and manage your health with ease. Get started with deDoctor today.",
         routeRegister: "/register_patient",
-        routeLogin: "/register_patient"
+        routeLogin: "/patient_dashboard"
     },
     {
       id: 3,

@@ -19,6 +19,8 @@ module.exports = {
         "dark-card": "#050021",
         "dark-footer": "#030017",
         "dark-input-text": "#828FA0",
+        "modal-heading": "#272b41",
+        
       },
       boxShadow: {
         "light": "2px 2px 13px rgb(0 0 0 / 10%)",
