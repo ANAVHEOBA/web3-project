@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
 function RegisterPatient() {
+  interface patientDataStruct {
+    name: string;
+    gender: string;
+    dob: string;
+    address: string;
+    city: string;
+    state: string;
+    country: string;
+    about: string;
+  }
+  const [userImage, setUserImage] = useState<any>();
+  const [patientData, setPatientData] = useState<patientDataStruct>({
+    name: "",
+    gender: "male",
+    dob: "",
+    address: "",
+    city: "",
+    state: "",
+    country: "",
+    about: "",
+  });
   return (
     <div className="px-5 py-3">
       <div className="flex flex-col md:flex-row space-x-5 space-y-5">
-        <div className="space-y-3 md:w-[15rem]">
-          
-        </div>
+        <div className="space-y-3 md:w-[15rem]"></div>
         <div className="form-group">
           <div className="flex w-full">
             <label
@@ -28,9 +47,9 @@ function RegisterPatient() {
                 type="file"
                 className="hidden"
                 name="image"
-                // onChange={(e) =>
-                //   setUserImage(e.currentTarget.files && e.currentTarget.files[0])
-                // }
+                onChange={(e) =>
+                  setUserImage(e.currentTarget.files && e.currentTarget.files[0])
+                }
               />
             </label>
           </div>
@@ -42,10 +61,13 @@ function RegisterPatient() {
               type={"text"}
               name="name"
               id="name"
-              // value={personalData.name}
-              // onChange={(e) =>
-              //   setPersonalData({ ...personalData, name: e.currentTarget.value })
-              // }
+              value={patientData.name}
+              onChange={(e) =>
+                setPatientData({
+                  ...patientData,
+                  name: e.currentTarget.value,
+                })
+              }
               className="input-box"
               placeholder="Enter Name"
             />
@@ -60,13 +82,13 @@ function RegisterPatient() {
                 placeholder="Select Gender"
                 name="gender"
                 id="gender"
-                // value={personalData.gender}
-                // onChange={(e) =>
-                //   setPersonalData({
-                //     ...personalData,
-                //     gender: e.currentTarget.value,
-                //   })
-                // }
+                value={patientData.gender}
+                onChange={(e) =>
+                  setPatientData({
+                    ...patientData,
+                    gender: e.currentTarget.value,
+                  })
+                }
               >
                 <option value={"male"}>Male</option>
                 <option value={"female"}>Female</option>
@@ -82,13 +104,13 @@ function RegisterPatient() {
                 name="dob"
                 className="input-box"
                 placeholder="Date of Birth"
-                // value={personalData.dob}
-                // onChange={(e) =>
-                //   setPersonalData({
-                //     ...personalData,
-                //     dob: e.currentTarget.value,
-                //   })
-                // }
+                value={patientData.dob}
+                onChange={(e) =>
+                  setPatientData({
+                    ...patientData,
+                    dob: e.currentTarget.value,
+                  })
+                }
               />
             </div>
           </div>
@@ -101,13 +123,13 @@ function RegisterPatient() {
               name="address"
               className="input-box md:w-[30rem]"
               placeholder="Enter Address"
-              // value={personalData.address}
-              // onChange={(e) =>
-              //   setPersonalData({
-              //     ...personalData,
-              //     address: e.currentTarget.value,
-              //   })
-              // }
+              value={patientData.address}
+              onChange={(e) =>
+                setPatientData({
+                  ...patientData,
+                  address: e.currentTarget.value,
+                })
+              }
             />
           </div>
           <div className="flex flex-col md:flex-row space-x-2">
@@ -121,13 +143,13 @@ function RegisterPatient() {
                 name="city"
                 className="input-box"
                 placeholder="City"
-                // value={personalData.city}
-                // onChange={(e) =>
-                //   setPersonalData({
-                //     ...personalData,
-                //     city: e.currentTarget.value,
-                //   })
-                // }
+                value={patientData.city}
+                onChange={(e) =>
+                  setPatientData({
+                    ...patientData,
+                    city: e.currentTarget.value,
+                  })
+                }
               />
             </div>
             <div className="input-group">
@@ -140,15 +162,34 @@ function RegisterPatient() {
                 name="state"
                 className="input-box"
                 placeholder="State"
-                // value={personalData.state}
-                // onChange={(e) =>
-                //   setPersonalData({
-                //     ...personalData,
-                //     state: e.currentTarget.value,
-                //   })
-                // }
+                value={patientData.state}
+                onChange={(e) =>
+                  setPatientData({
+                    ...patientData,
+                    state: e.currentTarget.value,
+                  })
+                }
               />
             </div>
+          </div>
+          <div className="input-group">
+            <label className="input-label" htmlFor="country">
+              Country *
+            </label>
+            <input
+              type={"text"}
+              name="name"
+              id="country"
+              value={patientData.country}
+              onChange={(e) =>
+                setPatientData({
+                  ...patientData,
+                  country: e.currentTarget.value,
+                })
+              }
+              className="input-box"
+              placeholder="Country"
+            />
           </div>
           <div className="input-group">
             <label className="input-label" htmlFor="about">
@@ -158,13 +199,13 @@ function RegisterPatient() {
               name="about"
               id="about"
               className="input-box md:w-[30rem] h-[6rem]"
-              // value={personalData.about}
-              // onChange={(e) =>
-              //   setPersonalData({
-              //     ...personalData,
-              //     about: e.currentTarget.value,
-              //   })
-              // }
+              value={patientData.about}
+              onChange={(e) =>
+                setPatientData({
+                  ...patientData,
+                  about: e.currentTarget.value,
+                })
+              }
             />
           </div>
           <button

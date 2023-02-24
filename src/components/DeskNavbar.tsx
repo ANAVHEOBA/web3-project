@@ -14,23 +14,18 @@ function DeskNavbar() {
     },
     {
       id: 2,
-      name: "Doctor Register",
-      url: "/doctor_registration",
-    },
-    {
-      id: 3,
       name: "Doctors",
       url: "/doctors",
     },
     {
-      id: 4,
-      name: "Pharmacy Register",
-      url: "/register_pharmacy",
+      id: 3,
+      name: "Pharmacy",
+      url: "/pharmacies",
     },
     {
       id: 4,
-      name: "Pharmacy",
-      url: "/pharmacies",
+      name: "Register",
+      url: "/register",
     },
   ];
   const { theme, setTheme } = useTheme();
