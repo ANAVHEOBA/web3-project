@@ -1,4 +1,12 @@
+import useNFTStorage from "@/hooks/useipfsStore";
+import useContractData from "@/hooks/usePaitnetRegister";
 import React, { useState } from "react";
+import { useAccount, useProvider, useSigner } from "wagmi";
+import { NFTStorage, File } from "nft.storage";
+import { ethers } from "ethers";
+import deDoctorABI from "@/constants/constants";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RegisterPatient() {
   interface patientDataStruct {
@@ -9,9 +17,9 @@ function RegisterPatient() {
     city: string;
     state: string;
     country: string;
-    about: string;
+    description: string;
   }
-  const [userImage, setUserImage] = useState<any>();
+  const [image, setImage] = useState<any>();
   const [patientData, setPatientData] = useState<patientDataStruct>({
     name: "",
     gender: "male",
@@ -20,10 +28,60 @@ function RegisterPatient() {
     city: "",
     state: "",
     country: "",
-    about: "",
+    description: "",
   });
+  const provider = useProvider();
+  const { data: signer, isError, isLoading } = useSigner();
+  const { address, isConnecting, isDisconnected } = useAccount();
+
+  // const [data, updateData] = useContractData(provider, signer, address);
+  // const {storeData, error, isReady} = useNFTStorage();
+  const onSubmitHandle = async () => {
+    try {
+      const nftStorage = new NFTStorage({
+        token: process.env.NEXT_PUBLIC_NFT_STORAGE_API || "",
+      });
+      const link = await nftStorage.store({ ...patientData, image });
+      const ipfsURL = `https://ipfs.io/ipfs/${link.url.substr(7)}`;
+      let patientRegisterContract = new ethers.Contract(
+        process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
+        deDoctorABI,
+        signer || provider
+      );
+      let traction = await patientRegisterContract.registerPatient(
+        patientData.name,
+        address,
+        patientData.gender,
+        patientData.city,
+        ipfsURL
+      );
+      let tx = await traction.wait();
+      toast.success("Wow so easy!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error: any) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
   return (
     <div className="px-5 py-3">
+       <ToastContainer />
       <div className="flex flex-col md:flex-row space-x-5 space-y-5">
         <div className="space-y-3 md:w-[15rem]"></div>
         <div className="form-group">
@@ -48,7 +106,7 @@ function RegisterPatient() {
                 className="hidden"
                 name="image"
                 onChange={(e) =>
-                  setUserImage(e.currentTarget.files && e.currentTarget.files[0])
+                  setImage(e.currentTarget.files && e.currentTarget.files[0])
                 }
               />
             </label>
@@ -199,19 +257,16 @@ function RegisterPatient() {
               name="about"
               id="about"
               className="input-box md:w-[30rem] h-[6rem]"
-              value={patientData.about}
+              value={patientData.description}
               onChange={(e) =>
                 setPatientData({
                   ...patientData,
-                  about: e.currentTarget.value,
+                  description: e.currentTarget.value,
                 })
               }
             />
           </div>
-          <button
-            className="submit-btn"
-            // onClick={() => dispatch(updateStep(1))}
-          >
+          <button className="submit-btn" onClick={onSubmitHandle}>
             Continue
           </button>
         </div>

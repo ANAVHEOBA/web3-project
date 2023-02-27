@@ -12,7 +12,7 @@ const DoctorProfile: React.FC =() => {
   const { id } = router.query;
   const [doctorData, setDoctorData] = useState<any>();
   const deDoctorList = useContractRead({
-    address: "0x139825F987F8a6E6980AC1BDf9D5f9046BE00361",
+    address: "0x7292AA6F5F417E3bD7Cd8307Cc6b75Bf45Ae2288",
     abi: deDoctorABI,
     functionName: "getDoctorById",
     args: [id],

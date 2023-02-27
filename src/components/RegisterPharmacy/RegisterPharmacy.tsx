@@ -4,11 +4,15 @@ import usePharmacyIPFs from "@/hooks/pharmacyStoreIpfs";
 import { RootState } from "@/store";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAccount, useContractWrite } from "wagmi";
 import OwnerDetails from "./OwnerDetails";
 import PharmacyPersonal from "./PharmacyPersonal";
 import PharmacyVerification from "./PharmacyVerification";
 import PreferencePharmacy from "./PreferencePharmacy";
+import { useAccount, useProvider, useSigner } from "wagmi";
+import { NFTStorage, File } from "nft.storage";
+import { ethers } from "ethers";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type pharmacyStruct = {
   name: string;
@@ -39,14 +43,13 @@ type pharmacyPreference = {
 };
 
 function RegisterPharmacy() {
-  const { address } = useAccount();
-  const { write, data, error, isSuccess } = useContractWrite({
-    mode: "recklesslyUnprepared",
-    address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
-    abi: deDoctorABI,
-    functionName: "registerPharmacy",
-    chainId: 8081,
-  });
+  // const { write, data, error, isSuccess } = useContractWrite({
+  //   mode: "recklesslyUnprepared",
+  //   address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
+  //   abi: deDoctorABI,
+  //   functionName: "registerPharmacy",
+  //   chainId: 8081,
+  // });
 
   const doctorStep = useSelector(
     (state: RootState) => state.pharmacyStep.value
@@ -87,28 +90,102 @@ function RegisterPharmacy() {
       startTime: "",
       endTime: "",
     });
+  const provider = useProvider();
+  const { data: signer, isError, isLoading } = useSigner();
+  const { address, isConnecting, isDisconnected } = useAccount();
   const onSubmitPharmacy = async () => {
-    console.log("Submit Phamacy");
-    const link: any = await usePharmacyIPFs(
-      pharmacyPersonaData,
-      pharmacyImage,
-      pharmacyOwnerData,
-      pharmacyOwnerImage,
-      pharmacyVerificationData,
-      pharmacyVerificationDoc,
-      pharmacyPreferenceData
-    );
-    const dataPharmacy : any = await write?.({
-      recklesslySetUnpreparedArgs: [
+    try {
+      console.log("Start");
+      
+      const nftStorage = new NFTStorage({
+        token: process.env.NEXT_PUBLIC_NFT_STORAGE_API || "",
+      });
+      const link = await nftStorage.store({
+        image: pharmacyImage,
+        name: pharmacyPersonaData.name,
+        description: pharmacyPersonaData.about || "",
+        address: pharmacyPersonaData.address,
+        city: pharmacyPersonaData.city,
+        state: pharmacyPersonaData.state,
+
+        ownerImage: pharmacyOwnerImage,
+        ownerName: pharmacyOwnerData.name,
+        gender: pharmacyOwnerData.gender,
+        dob: pharmacyOwnerData.dob,
+        ownerCity: pharmacyOwnerData.city,
+        ownerState: pharmacyOwnerData.state,
+        ownerAbout: pharmacyOwnerData.about,
+
+        pharmacyVerificationDoc: pharmacyVerificationDoc,
+        councilNumber: pharmacyVerificationData.councilNumber,
+        medicineSpecialization: pharmacyVerificationData.medicineSpecialization,
+
+        openDays: pharmacyPreferenceData.openDays,
+        startTime: pharmacyPreferenceData.startTime,
+        endTime: pharmacyPreferenceData.endTime,
+      });
+      const ipfsURL = `https://ipfs.io/ipfs/${link.url.substr(7)}`;
+      let patientRegisterContract = new ethers.Contract(
+        process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
+        deDoctorABI,
+        signer || provider
+      );
+      console.log(ipfsURL);
+      
+      let traction = await patientRegisterContract.registerPharmacy(
         pharmacyPersonaData.name,
         pharmacyPersonaData.city,
         pharmacyOwnerData.name,
         address,
         pharmacyVerificationData.councilNumber,
-        link,
-      ],
-    });
-    console.log("End");
+        ipfsURL
+      );
+      let tx = await traction.wait();
+      console.log(tx);
+      
+      toast.success("Pharmacy Register Succesfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error: any) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+    // console.log("Submit Phamacy");
+    // const link: any = await usePharmacyIPFs(
+    //   pharmacyPersonaData,
+    //   pharmacyImage,
+    //   pharmacyOwnerData,
+    //   pharmacyOwnerImage,
+    //   pharmacyVerificationData,
+    //   pharmacyVerificationDoc,
+    //   pharmacyPreferenceData
+    // );
+    // const dataPharmacy : any = await write?.({
+    //   recklesslySetUnpreparedArgs: [
+    //     pharmacyPersonaData.name,
+    //     pharmacyPersonaData.city,
+    //     pharmacyOwnerData.name,
+    //     address,
+    //     pharmacyVerificationData.councilNumber,
+    //     link,
+    //   ],
+    // });
+    // console.log("End");
   };
 
   const registrationSteps = [

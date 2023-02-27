@@ -7,15 +7,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateStep } from "@/features/doctorStepSlice";
 import { RootState } from "@/store";
 import useIPFS from "@/hooks/storeIpfs";
-import {
-  useContract,
-  useSigner,
-  useProvider,
-  useContractWrite,
-} from "wagmi";
-import deDoctorABI from "@/constants/constants";
+import { useContract, useSigner, useProvider, useContractWrite } from "wagmi";
+
 import { ethers } from "ethers";
 import { useAccount } from "wagmi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { NFTStorage, File } from "nft.storage";
+import deDoctorABI from "@/constants/constants";
 
 type personalData = {
   name: string;
@@ -86,61 +85,77 @@ const DoctorRegistration: React.FC = () => {
     language: "",
     endTime: "",
   });
-  // const {contractData, isLoading, serverError} = useSmartContract();
   const { data: signer, isError, isLoading } = useSigner();
   const provider = useProvider();
 
-  const contract = useContract({
-    address: process.env.DEDOCTOR_SMART_CONTRACT || "",
-    abi: deDoctorABI,
-    signerOrProvider: signer,
-  });
-  // const { data, isRefetching, isSuccess, refetch } = useContractRead({
-  //   address: "0xC9aBeA6E1e4294fC2653180F7eD3AD001427c692",
-  //   abi: deDoctorABI,
-  //   functionName: "getAllDoctors",
-  // });
-
-  const { write, data, error, isSuccess } = useContractWrite({
-    mode: "recklesslyUnprepared",
-    address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
-    abi: deDoctorABI,
-    functionName: "registerDoctor",
-    chainId: 8081,
-  });
-  
   const submitIpfs = async () => {
-    const link : any = await useIPFS(
-      personalData,
-      userImage,
-      identificationData,
-      identificationDoc,
-      medicalCouncilData,
-      councilFile,
-      preference
-    );
-    const price = await ethers.utils.parseUnits(preference.minAmount.toString(), "ether");
-    await write?.({
-      recklesslySetUnpreparedArgs: [
+    try {
+      const nftStorage = new NFTStorage({
+        token: process.env.NEXT_PUBLIC_NFT_STORAGE_API || "",
+      });
+      const link = await nftStorage.store({
+        image: userImage,
+        name: personalData.name,
+        description: personalData.about || "",
+        about: personalData.about || "",
+        address: personalData.address,
+        city: personalData.city,
+        dob: personalData.dob,
+        gender: personalData.gender,
+        state: personalData.state,
+        docNumber: identificationData.docNumber,
+        docType: identificationData.docType,
+        identificationDoc: identificationDoc,
+        councilNumber: medicalCouncilData.councilNumber,
+        specialization: medicalCouncilData.specialization,
+        councilFile: councilFile,
+        minAmount: preference.minAmount,
+        callType: preference.callType,
+        date: preference.date,
+        days: preference.days,
+        startTime: preference.startTime,
+        language: preference.language,
+        endTime: preference.endTime,
+      });
+      const ipfsURL = `https://ipfs.io/ipfs/${link.url.substr(7)}`;
+      const price = await ethers.utils.parseUnits(preference.minAmount.toString(), "ether");
+      let patientRegisterContract = new ethers.Contract(
+        process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
+        deDoctorABI,
+        signer || provider
+      );
+      let traction = await patientRegisterContract.registerDoctor(
         personalData.name,
         personalData.gender,
         personalData.city,
         preference.language,
         address,
         price,
-        link,
-      ],
-    });
-
-    
-
-    // let deDoctorContract = new ethers.Contract(
-    //   process.env.DEDOCTOR_SMART_CONTRACT || "",
-    //   deDoctorABI,
-    //   signer || provider
-    // );
-
-    // const contract = useContract();
+        link
+      );
+      let tx = await traction.wait();
+      toast.success("Doctor are Registered!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error: any) {
+      toast.error(error.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   const registrationSteps = [
@@ -202,6 +217,7 @@ const DoctorRegistration: React.FC = () => {
   ];
   return (
     <div className="px-5 py-3">
+      <ToastContainer theme="dark" />
       <div className="flex flex-col md:flex-row space-x-5 space-y-5">
         <div className="space-y-3 md:w-[24rem]">
           {registrationSteps.map((registrationStep) => {

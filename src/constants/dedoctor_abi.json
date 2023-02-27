@@ -89,12 +89,9 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "",
+        "name": "patientId",
         "type": "uint256"
-      }
-    ],
-    "name": "doctors",
-    "outputs": [
+      },
       {
         "internalType": "uint256",
         "name": "doctorId",
@@ -102,41 +99,13 @@
       },
       {
         "internalType": "string",
-        "name": "name",
+        "name": "appointmentUri",
         "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "gender",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "city",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "language",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      },
-      {
-        "internalType": "string",
-        "name": "profileURI",
-        "type": "string"
-      },
-      {
-        "internalType": "address",
-        "name": "docAddress",
-        "type": "address"
       }
     ],
-    "stateMutability": "view",
+    "name": "createAppoitment",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -184,6 +153,33 @@
             "internalType": "address",
             "name": "docAddress",
             "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "appojntemtId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "patientId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "doctorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "appointmentUri",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct DeDoctor.AppointmentStruct[]",
+            "name": "appointments",
+            "type": "tuple[]"
           }
         ],
         "internalType": "struct DeDoctor.DoctorProfile[]",
@@ -295,9 +291,202 @@
             "internalType": "address",
             "name": "docAddress",
             "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "appojntemtId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "patientId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "doctorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "appointmentUri",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct DeDoctor.AppointmentStruct[]",
+            "name": "appointments",
+            "type": "tuple[]"
           }
         ],
         "internalType": "struct DeDoctor.DoctorProfile",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getDoctorByWalletAddress",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "doctorId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "gender",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "language",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "price",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "profileURI",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "docAddress",
+            "type": "address"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "appojntemtId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "patientId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "doctorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "appointmentUri",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct DeDoctor.AppointmentStruct[]",
+            "name": "appointments",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct DeDoctor.DoctorProfile",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getPatientByWalletAddress",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "patientId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "gender",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "city",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "patientUri",
+            "type": "string"
+          },
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "appojntemtId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "patientId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "doctorId",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "appointmentUri",
+                "type": "string"
+              }
+            ],
+            "internalType": "struct DeDoctor.AppointmentStruct[]",
+            "name": "appointments",
+            "type": "tuple[]"
+          }
+        ],
+        "internalType": "struct DeDoctor.PatientStruct",
         "name": "",
         "type": "tuple"
       }
@@ -400,6 +589,39 @@
       }
     ],
     "name": "registerDoctor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "gender",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "city",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "patientUri",
+        "type": "string"
+      }
+    ],
+    "name": "registerPatient",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
