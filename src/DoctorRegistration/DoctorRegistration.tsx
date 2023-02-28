@@ -131,7 +131,7 @@ const DoctorRegistration: React.FC = () => {
         preference.language,
         address,
         price,
-        link
+        ipfsURL
       );
       let tx = await traction.wait();
       toast.success("Doctor are Registered!", {

@@ -1,8 +1,15 @@
+import shortAddress from "@/utils/shortAddress";
+import { type } from "os";
 import React, { useState } from "react";
 import CreateAppointmentModal from "./CreateAppointmentModal";
 
-function NewAppointment() {
-  const doctorList = [
+type props = {
+  doctorList: any;
+  // patientId: any;
+};
+
+const NewAppointment: React.FC<props> = ({ doctorList }) => {
+  const doctorList1 = [
     {
       id: 1,
       name: "Mayan Radadiya",
@@ -43,19 +50,17 @@ function NewAppointment() {
           </tr>
         </thead>
         <tbody>
-          {doctorList.map((doctorItem) => {
+          {doctorList.map((doctorItem: any) => {
             return (
               <tr key={doctorItem.id} className="py-2 border-b">
                 <td className="py-4 px-2">{doctorItem.id}</td>
                 <td className="py-4 px-2 text-center">{doctorItem.name}</td>
+                <td className="py-4 px-2 text-center">{doctorItem.category}</td>
                 <td className="py-4 px-2 text-center">
-                  {doctorItem.specialization}
+                  {doctorItem.chargeStart}
                 </td>
                 <td className="py-4 px-2 text-center">
-                  {doctorItem.walletAddress}
-                </td>
-                <td className="py-4 px-2 text-center">
-                  {doctorItem.consultFee}
+                  {shortAddress(doctorItem.walletAddress)}
                 </td>
                 <td
                   className="py-4 px-2 cursor-pointer hover:text-primary-green"
@@ -76,6 +81,6 @@ function NewAppointment() {
       )}
     </div>
   );
-}
+};
 
 export default NewAppointment;

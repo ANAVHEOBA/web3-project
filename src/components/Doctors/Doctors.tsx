@@ -1,10 +1,16 @@
 import deDoctorABI from "@/constants/constants";
 import generateIpfsMediaLink from "@/utils/generateIpfsLink";
 import axios from "axios";
+import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useContractRead } from "wagmi";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import LongDoctorCard from "./LongDoctorCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAccount, useSigner } from "wagmi";
+import { useProvider } from "wagmi";
+import { Dna } from "react-loader-spinner";
 
 function Doctors() {
   interface doctorStruct {
@@ -17,15 +23,19 @@ function Doctors() {
     chargeStart: number;
     chargeEnd: number;
   }
+  const provider = useProvider();
+  const { data: signer, isError, isLoading } = useSigner();
+  const { address, isConnecting, isDisconnected } = useAccount();
 
-  const deDoctorList = useContractRead({
-    address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
-    abi: deDoctorABI,
-    functionName: "getAllDoctors",
-  });
   const [doctorData, setDoctorData] = useState<any>();
   const updateData = async () => {
-    const data: any = deDoctorList.data;
+    let patientRegisterContract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
+      deDoctorABI,
+      signer || provider
+    );
+    let traction = await patientRegisterContract.getAllDoctors();
+    const data: any = traction;
     let newItems: any = await Promise.all(
       data.map(async (d: any) => {
         console.log(d);
@@ -46,20 +56,33 @@ function Doctors() {
     );
     setDoctorData(newItems);
   };
-  
+
   useEffect(() => {
     updateData();
-  }, [deDoctorList.data]);
+  }, []);
 
   return (
     <div>
       <Breadcrumb />
-      <div className="mx-5 my-3 space-y-3">
-        {doctorData &&
-          doctorData.map((doctorData: any) => {
-            return <LongDoctorCard key={doctorData.id} {...doctorData} />;
-          })}
-      </div>
+      {doctorData ? (
+        <div className="mx-5 my-3 space-y-3">
+          {doctorData &&
+            doctorData.map((doctorData: any) => {
+              return <LongDoctorCard key={doctorData.id} {...doctorData} />;
+            })}
+        </div>
+      ) : (
+        <div className="flex justify-center items-center">
+          <Dna
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="dna-loading"
+            wrapperStyle={{}}
+            wrapperClass="dna-wrapper"
+          />
+        </div>
+      )}
     </div>
   );
 }

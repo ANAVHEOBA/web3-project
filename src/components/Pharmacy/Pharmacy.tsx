@@ -5,6 +5,12 @@ import React, { useEffect, useState } from "react";
 import { useContractRead } from "wagmi";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import PharmacyCard from "./PharmacyCard";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAccount, useSigner } from "wagmi";
+import { useProvider } from "wagmi";
+import { ethers } from "ethers";
+import { Dna } from "react-loader-spinner";
 
 function Pharmacy() {
   interface pharmacyStruct {
@@ -45,53 +51,67 @@ function Pharmacy() {
   //     openTime: "",
   //   },
   // ];
-  const dePharmacyList = useContractRead({
-    address: "0x752af2Fe8473819728303C75B6740A2Df5e200fB",
-    abi: deDoctorABI,
-    functionName: "getAllPharmacies",
-  });
-  console.log(dePharmacyList.data && dePharmacyList.data);
 
   const [pharmacyList, setPharmacyList] = useState<any>();
+  const provider = useProvider();
+  const { data: signer, isError, isLoading } = useSigner();
+  const { address, isConnecting, isDisconnected } = useAccount();
   const updateData = async () => {
-    if (dePharmacyList.data) {
-      const data: any = dePharmacyList.data;
-      console.log(data);
+    let patientRegisterContract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
+      deDoctorABI,
+      signer || provider
+    );
+    let traction = await patientRegisterContract.getAllPharmacies();
+    const data: any = traction;
+    console.log(data);
 
-      let newItems: any = await Promise.all(
-        data.map(async (d: any) => {
-          console.log(d);
-          let meta: any = await axios.get(d.pharmacyUri);
-          meta = meta.data;
-          console.log(meta);
-          return {
-            id: d.pharmacyId.toString(),
-            name: meta.name,
-            address: meta.address,
-            openTime: meta.startTime,
-            dealer: meta.medicineSpecialization,
-            image: generateIpfsMediaLink(meta.image),
-            phone: "8877889988",
-          };
-        })
-      );
-      setPharmacyList(newItems);
-    }
+    let newItems: any = await Promise.all(
+      data.map(async (d: any) => {
+        console.log(d);
+        let meta: any = await axios.get(d.pharmacyUri);
+        meta = meta.data;
+        console.log(meta);
+        return {
+          id: d.pharmacyId.toString(),
+          name: meta.name,
+          address: meta.address,
+          openTime: meta.startTime,
+          dealer: meta.medicineSpecialization,
+          image: generateIpfsMediaLink(meta.image),
+          phone: "8877889988",
+        };
+      })
+    );
+    setPharmacyList(newItems);
   };
 
   useEffect(() => {
     updateData();
-  }, [dePharmacyList.data]);
+  }, []);
   return (
     <div>
       <Breadcrumb />
       <div className="mx-5">
-        <div className="space-y-5 my-5">
-          {pharmacyList &&
-            pharmacyList.map((pharmacyData: any) => {
-              return <PharmacyCard key={pharmacyData.id} {...pharmacyData} />;
-            })}
-        </div>
+        {pharmacyList ? (
+          <div className="space-y-5 my-5">
+            {pharmacyList &&
+              pharmacyList.map((pharmacyData: any) => {
+                return <PharmacyCard key={pharmacyData.id} {...pharmacyData} />;
+              })}
+          </div>
+        ) : (
+          <div className="flex justify-center items-center">
+            <Dna
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+            />
+          </div>
+        )}
       </div>
     </div>
   );

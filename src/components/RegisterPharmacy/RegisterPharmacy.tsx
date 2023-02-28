@@ -248,6 +248,7 @@ function RegisterPharmacy() {
 
   return (
     <div className="px-5 py-3">
+      <ToastContainer theme="light" />
       <div className="flex flex-col md:flex-row space-x-5 space-y-5">
         <div className="space-y-3 md:w-[24rem]">
           {registrationSteps.map((registrationStep) => {
