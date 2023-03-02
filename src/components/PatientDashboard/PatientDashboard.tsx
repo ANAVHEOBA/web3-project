@@ -21,6 +21,7 @@ function PatientDashboard() {
   const { address, isConnecting, isDisconnected } = useAccount();
   const [patientData, setPatientData] = useState<any>();
   const [doctorList, setDoctorList] = useState<any>();
+  const [myAppointmentList, setMyAppointmentList] = useState<any>();
   interface tabStruct {
     id: number;
     title: string;
@@ -30,7 +31,7 @@ function PatientDashboard() {
     {
       id: 1,
       title: "My Appointment",
-      component: <MyAppointment />,
+      component: <MyAppointment myAppointmentList={myAppointmentList} />,
     },
     {
       id: 2,
@@ -48,11 +49,11 @@ function PatientDashboard() {
     let traction = await patientRegisterContract.getPatientByWalletAddress(
       address
     );
-    console.log(traction);
 
     let meta: any = await axios.get(traction.patientUri);
     meta = meta.data;
     let patientId = traction.patientId.toString();
+    localStorage.setItem("patientId", patientId);
     setPatientData({ ...meta, patientId });
   };
 
@@ -65,7 +66,6 @@ function PatientDashboard() {
     let traction = await patientRegisterContract.getAllDoctors();
     let newItems: any = await Promise.all(
       traction.map(async (d: any) => {
-        console.log(d);
         let meta: any = await axios.get(d.profileURI);
         meta = meta.data;
         return {
@@ -84,10 +84,39 @@ function PatientDashboard() {
     setDoctorList(newItems);
   };
 
+  const fetchPatientAppointments = async () => {
+    let patientRegisterContract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
+      deDoctorABI,
+      signer || provider
+    );
+    let traction = await patientRegisterContract.getAppimtmentsByPatientId(
+      localStorage.getItem("patientId")?.toString()
+    );
+    let newItems: any = await Promise.all(
+      traction.map(async (d: any) => {
+        console.log(d);
+        return {
+          doctorId: d.doctorId.toString(),
+          pastSymptoms: d.pastSymptoms,
+          symptoms: d.symptoms,
+          time: d.time,
+          date: d.date,
+          appointmentId: d.appojntemtId.toString(),
+        };
+      })
+    );
+    setMyAppointmentList(newItems);
+  };
+
   useEffect(() => {
     fetchPatientData();
     fetchDoctorList();
-  }, []);
+    if (patientData && patientData.patientId) {
+      console.log(localStorage.getItem("patientId"));
+      fetchPatientAppointments();
+    }
+  }, [patientData && patientData.patientId]);
   return (
     <div className="flex space-x-5 my-8 mx-5">
       {patientData ? (

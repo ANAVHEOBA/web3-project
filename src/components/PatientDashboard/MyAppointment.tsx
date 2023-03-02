@@ -1,32 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+import JoinAppointment from "./JoinAppointment";
 
-function MyAppointment() {
-  const appointmentList = [
-    {
-      id: 1,
-      Symptoms: "Fever Headche and stomach Pain",
-      pastMedicalHistory: "Diabeties",
-      date: "2023-02-20",
-      time: "11:30",
-      view: "",
-    },
-    {
-      id: 2,
-      Symptoms: "Fever Headche and stomach Pain",
-      pastMedicalHistory: "Diabeties",
-      date: "2023-02-20",
-      time: "11:30",
-      view: "",
-    },
-    {
-      id: 3,
-      Symptoms: "Fever Headche and stomach Pain",
-      pastMedicalHistory: "Diabeties",
-      date: "2023-02-20",
-      time: "11:30",
-      view: "",
-    },
-  ];
+type props = {
+  myAppointmentList: any;
+};
+
+const MyAppointment: React.FC<props> = ({ myAppointmentList }) => {
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [activeDoctorId, setActiveDoctorId] = useState<any>();
   return (
     <div className="px-4 py-4 border border-[#f0f0f0] rounded  flex flex-col dark:border-dark-input-border dark:bg-dark-card">
       <h4 className="heading dark:text-primary-yellow">My Appointment</h4>
@@ -42,25 +23,43 @@ function MyAppointment() {
           </tr>
         </thead>
         <tbody>
-          {appointmentList.map((appointmentItem) => {
-            return (
-              <tr
-                key={appointmentItem.id}
-                className="text-left border-b border-[#f0f0f0] dark:border-dark-input-border"
-              >
-                <td className="text-left">1.</td>
-                <td className="py-2 px-1">Fever Headche and stomach Pain</td>
-                <td className="py-2 px-1">Diabeties</td>
-                <td className="py-2 px-1">2023-02-20</td>
-                <td className="py-2 px-1">11:30</td>
-                <td className="py-2 px-1">View</td>
-              </tr>
-            );
-          })}
+          {myAppointmentList &&
+            myAppointmentList.map((appointmentItem: any) => {
+              return (
+                <tr
+                  key={appointmentItem.appointmentId}
+                  className="text-left border-b border-[#f0f0f0] dark:border-dark-input-border"
+                >
+                  <td className="text-left">{appointmentItem.doctorId}</td>
+                  <td className="py-2 px-1">{appointmentItem.symptoms}</td>
+                  <td className="py-2 px-1">{appointmentItem.pastSymptoms}</td>
+                  <td className="py-2 px-1">{appointmentItem.date}</td>
+                  <td className="py-2 px-1">{appointmentItem.time}</td>
+                  <td
+                    className="py-2 px-1"
+                    onClick={() => {
+                      setActiveDoctorId(appointmentItem.doctorId);
+                      setIsShowModal(true);
+                    }}
+                  >
+                    View
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
+      <div>
+        {isShowModal && (
+          <JoinAppointment
+            activeDoctorId={activeDoctorId}
+            isShowModal={isShowModal}
+            setIsShowModal={setIsShowModal}
+          />
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default MyAppointment;

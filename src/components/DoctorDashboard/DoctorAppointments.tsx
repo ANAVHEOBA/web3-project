@@ -2,37 +2,11 @@ import React, { useState } from "react";
 import AppointmentModal from "./AppointmentModal";
 
 type props = {
-  isShowModal: boolean;
-  setIsModal: (isShowModal: boolean) => void;
+  doctorAppointmentList: any;
 };
 
-const DoctorAppointments = () => {
-  const appointmentList = [
-    {
-      id: 1,
-      Symptoms: "Fever Headche and stomach Pain",
-      pastMedicalHistory: "Diabeties",
-      date: "2023-02-20",
-      time: "11:30",
-      view: "",
-    },
-    {
-      id: 2,
-      Symptoms: "Fever Headche and stomach Pain",
-      pastMedicalHistory: "Diabeties",
-      date: "2023-02-20",
-      time: "11:30",
-      view: "",
-    },
-    {
-      id: 3,
-      Symptoms: "Fever Headche and stomach Pain",
-      pastMedicalHistory: "Diabeties",
-      date: "2023-02-20",
-      time: "11:30",
-      view: "",
-    },
-  ];
+const DoctorAppointments: React.FC<props> = ({doctorAppointmentList}) => {
+  console.log(doctorAppointmentList);
   const [isShowModal, setIsModal] = useState<boolean>(false);
   return (
     <div className="px-4 py-4 border border-[#f0f0f0] rounded space-y-2 flex flex-col md:flex-row justify-between dark:border-dark-input-border dark:bg-dark-card">
@@ -48,17 +22,17 @@ const DoctorAppointments = () => {
           </tr>
         </thead>
         <tbody>
-          {appointmentList.map((appointmentItem) => {
+          {doctorAppointmentList && doctorAppointmentList.map((appointmentItem: any) => {
             return (
               <tr
                 key={appointmentItem.id}
                 className="text-left border-b border-[#f0f0f0] dark:border-dark-input-border"
               >
                 <td className="text-left">1.</td>
-                <td>Fever Headche and stomach Pain</td>
-                <td>Diabeties</td>
-                <td>2023-02-20</td>
-                <td>11:30</td>
+                <td>{appointmentItem.symptoms}</td>
+                <td>{appointmentItem.pastSymptoms}</td>
+                <td>{appointmentItem.date}</td>
+                <td>{appointmentItem.time}</td>
                 <td onClick={() => setIsModal(true)}>View</td>
               </tr>
             );

@@ -99,7 +99,22 @@
       },
       {
         "internalType": "string",
-        "name": "appointmentUri",
+        "name": "symptoms",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "pastSymptoms",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "time",
         "type": "string"
       }
     ],
@@ -153,33 +168,6 @@
             "internalType": "address",
             "name": "docAddress",
             "type": "address"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "appojntemtId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "patientId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "doctorId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "appointmentUri",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct DeDoctor.AppointmentStruct[]",
-            "name": "appointments",
-            "type": "tuple[]"
           }
         ],
         "internalType": "struct DeDoctor.DoctorProfile[]",
@@ -248,6 +236,138 @@
         "type": "uint256"
       }
     ],
+    "name": "getAppimtmentsByDoctortId",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "appojntemtId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "patientId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "doctorId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "appointmentUri",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "symptoms",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "pastSymptoms",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "date",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "time",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct DeDoctor.AppointmentStruct[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "patientId",
+        "type": "uint256"
+      }
+    ],
+    "name": "getAppimtmentsByPatientId",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "appojntemtId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "patientId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "doctorId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "appointmentUri",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "symptoms",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "pastSymptoms",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "date",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "time",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "walletAddress",
+            "type": "address"
+          }
+        ],
+        "internalType": "struct DeDoctor.AppointmentStruct[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "doctorId",
+        "type": "uint256"
+      }
+    ],
     "name": "getDoctorById",
     "outputs": [
       {
@@ -291,33 +411,6 @@
             "internalType": "address",
             "name": "docAddress",
             "type": "address"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "appojntemtId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "patientId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "doctorId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "appointmentUri",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct DeDoctor.AppointmentStruct[]",
-            "name": "appointments",
-            "type": "tuple[]"
           }
         ],
         "internalType": "struct DeDoctor.DoctorProfile",
@@ -379,33 +472,6 @@
             "internalType": "address",
             "name": "docAddress",
             "type": "address"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "appojntemtId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "patientId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "doctorId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "appointmentUri",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct DeDoctor.AppointmentStruct[]",
-            "name": "appointments",
-            "type": "tuple[]"
           }
         ],
         "internalType": "struct DeDoctor.DoctorProfile",
@@ -457,33 +523,6 @@
             "internalType": "string",
             "name": "patientUri",
             "type": "string"
-          },
-          {
-            "components": [
-              {
-                "internalType": "uint256",
-                "name": "appojntemtId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "patientId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "uint256",
-                "name": "doctorId",
-                "type": "uint256"
-              },
-              {
-                "internalType": "string",
-                "name": "appointmentUri",
-                "type": "string"
-              }
-            ],
-            "internalType": "struct DeDoctor.AppointmentStruct[]",
-            "name": "appointments",
-            "type": "tuple[]"
           }
         ],
         "internalType": "struct DeDoctor.PatientStruct",

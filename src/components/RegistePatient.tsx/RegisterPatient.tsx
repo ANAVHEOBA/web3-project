@@ -7,6 +7,7 @@ import { ethers } from "ethers";
 import deDoctorABI from "@/constants/constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ColorRing } from "react-loader-spinner";
 
 function RegisterPatient() {
   interface patientDataStruct {
@@ -20,6 +21,7 @@ function RegisterPatient() {
     description: string;
   }
   const [image, setImage] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
   const [patientData, setPatientData] = useState<patientDataStruct>({
     name: "",
     gender: "male",
@@ -38,6 +40,7 @@ function RegisterPatient() {
   // const {storeData, error, isReady} = useNFTStorage();
   const onSubmitHandle = async () => {
     try {
+      setLoading(true);
       const nftStorage = new NFTStorage({
         token: process.env.NEXT_PUBLIC_NFT_STORAGE_API || "",
       });
@@ -56,6 +59,7 @@ function RegisterPatient() {
         ipfsURL
       );
       let tx = await traction.wait();
+      setLoading(false);
       toast.success("Wow so easy!", {
         position: "top-right",
         autoClose: 5000,
@@ -67,6 +71,7 @@ function RegisterPatient() {
         theme: "light",
       });
     } catch (error: any) {
+      setLoading(true);
       toast.error(error.message, {
         position: "top-right",
         autoClose: 5000,
@@ -77,11 +82,12 @@ function RegisterPatient() {
         progress: undefined,
         theme: "light",
       });
+      setLoading(false);
     }
   };
   return (
     <div className="px-5 py-3">
-       <ToastContainer />
+      <ToastContainer />
       <div className="flex flex-col md:flex-row space-x-5 space-y-5">
         <div className="space-y-3 md:w-[15rem]"></div>
         <div className="form-group">
@@ -266,8 +272,24 @@ function RegisterPatient() {
               }
             />
           </div>
-          <button className="submit-btn" onClick={onSubmitHandle}>
-            Continue
+          <button
+            className="submit-btn flex space-x-2 items-center h-14"
+            onClick={onSubmitHandle}
+          >
+            {isLoading ? (
+              <ColorRing
+                visible={true}
+                height="40"
+                width="40"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
+              />
+            ) : (
+              ""
+            )}
+            <span>Register</span>
           </button>
         </div>
       </div>

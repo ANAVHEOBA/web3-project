@@ -8,31 +8,12 @@ type props = {
   // patientId: any;
 };
 
-const NewAppointment: React.FC<props> = ({ doctorList }) => {
-  const doctorList1 = [
-    {
-      id: 1,
-      name: "Mayan Radadiya",
-      specialization: "Heart, nose eye special",
-      consultFee: 5,
-      walletAddress: "0x78...7c4",
-    },
-    {
-      id: 2,
-      name: "Mayan Radadiya",
-      specialization: "Heart, nose eye special",
-      consultFee: 5,
-      walletAddress: "0x78...7c4",
-    },
-    {
-      id: 3,
-      name: "Mayan Radadiya",
-      specialization: "Heart, nose eye special",
-      consultFee: 5,
-      walletAddress: "0x78...7c4",
-    },
-  ];
+const NewAppointment: React.FC<props> = ({ doctorList, }) => {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [selectedDoctor, setSelectedDoctor] = useState<any>();
+  const updateCreateAppointment = () => {
+    setIsShowModal(true);
+  };
   return (
     <div className="px-4 py-4 border border-[#f0f0f0] rounded flex flex-col dark:border-dark-input-border dark:bg-dark-card">
       <h4 className="heading dark:text-primary-yellow">
@@ -64,7 +45,10 @@ const NewAppointment: React.FC<props> = ({ doctorList }) => {
                 </td>
                 <td
                   className="py-4 px-2 cursor-pointer hover:text-primary-green"
-                  onClick={() => setIsShowModal(true)}
+                  onClick={() => {
+                    setSelectedDoctor(doctorItem);
+                    setIsShowModal(true);
+                  }}
                 >
                   Create
                 </td>
@@ -77,6 +61,8 @@ const NewAppointment: React.FC<props> = ({ doctorList }) => {
         <CreateAppointmentModal
           isShowModal={isShowModal}
           setIsShowModal={setIsShowModal}
+          // patientId={patientId}
+          selectedDoctor={selectedDoctor}
         />
       )}
     </div>

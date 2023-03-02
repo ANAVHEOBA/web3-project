@@ -15,7 +15,7 @@ function DoctorDashboard() {
   const { data: signer, isError, isLoading } = useSigner();
   const { address, isConnecting, isDisconnected } = useAccount();
   const [doctorData, setDoctorData] = useState<any>();
-
+  const [doctorAppointmentList, setDoctorAppointmentList] = useState<any>();
   const fetchDoctorData = async () => {
     let patientRegisterContract = new ethers.Contract(
       process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
@@ -25,18 +25,53 @@ function DoctorDashboard() {
     let traction = await patientRegisterContract.getDoctorByWalletAddress(
       address
     );
-    console.log(traction);
     let meta: any = await axios.get(traction.profileURI);
     meta = meta.data;
-    console.log(meta);
-    setDoctorData(meta);
+    let doctorId = traction.doctorId.toString();
+    setDoctorData({ ...meta, doctorId });
     // let tx: any = await traction.wait();
     // console.log(tx);
   };
 
+  const fetchDoctorAppointments = async () => {
+    let patientRegisterContract = new ethers.Contract(
+      process.env.NEXT_PUBLIC_DEDOCTOR_SMART_CONTRACT || "",
+      deDoctorABI,
+      signer || provider
+    );
+    let traction = await patientRegisterContract.getAppimtmentsByDoctortId(
+      doctorData.doctorId
+    );
+    let newItems: any = await Promise.all(
+      traction.map(async (d: any) => {
+        return {
+          doctorId: d.doctorId.toString(),
+          patientId: d.patientId.toString(),
+          pastSymptoms: d.pastSymptoms,
+          symptoms: d.symptoms,
+          time: d.time,
+          date: d.date,
+          appointmentId: d.appojntemtId.toString(),
+        };
+      })
+    );
+    setDoctorAppointmentList(newItems);
+  };
+
   useEffect(() => {
-    fetchDoctorData();
-  }, []);
+    if (address) {
+      fetchDoctorData();
+      console.log(doctorData);
+
+      if (doctorData && doctorData.doctorId) {
+        console.log("Start");
+        console.log(doctorData.doctorId);
+
+        fetchDoctorAppointments();
+        console.log("End");
+      }
+    }
+  }, [doctorData]);
   return (
     <div className="flex space-x-5 my-8 mx-5">
       <div className="">
@@ -56,7 +91,20 @@ function DoctorDashboard() {
         )}
       </div>
       <div>
-        <DoctorAppointments />
+        {doctorAppointmentList ? (
+          <DoctorAppointments doctorAppointmentList={doctorAppointmentList} />
+        ) : (
+          <div className="flex justify-end items-center">
+            <Dna
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="dna-loading"
+              wrapperStyle={{}}
+              wrapperClass="dna-wrapper"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
