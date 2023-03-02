@@ -24,7 +24,7 @@ function DeskNavbar() {
     },
     {
       id: 4,
-      name: "Register",
+      name: "Register/Login",
       url: "/register",
     },
   ];
