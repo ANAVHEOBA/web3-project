@@ -45,7 +45,7 @@ function SelectRegister() {
   ];
   return (
     <div>
-      <Breadcrumb />
+      <Breadcrumb heading="Register/Login" subHeading="Home / Register-Login" />
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-y-4 mx-5 gap-x-4 mb-10 mt-5">
         {registerTypeList.map((registerTypeItem: registerTypeStruct) => {
           return (

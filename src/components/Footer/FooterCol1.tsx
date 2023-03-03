@@ -8,9 +8,9 @@ function FooterCol1() {
         <Image src={"/logo_white.png"} alt={"DeDoctor"} fill />
       </div>
       <p className="text-white dark:text-dark-muted">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias error
-        adipisci debitis cum laborum voluptatibus sapiente quidem est mollitia
-        iusto?
+        We understand that time is valuable, and our service is designed to be
+        convenient and efficient.Our service is available
+        24/7, so patients can receive medical advice whenever they need it.
       </p>
     </div>
   );

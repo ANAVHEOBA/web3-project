@@ -68,16 +68,21 @@ function BookDoctor() {
     <section className="grid grid-cols-1 md:grid-cols-2 gap-y-4 px-5  md:px-10 py-10 md:py-20 bg-[#f9f9f9] dark:bg-[#030B29]">
       <div className="flex flex-col space-y-2">
         <h3 className="heading dark:text-primary-yellow">Book Our Doctor</h3>
-        <p className="sub-heading dark:text-white">Lorem Ipsum is simply dummy text</p>
-        <p className="text-[#272b41] dark:text-dark-muted">
-          It is a long established fact that a reader will be distracted by the
-          readable content of a page when looking at its layout. The point of
-          using Lorem Ipsum.
+        <p className="sub-heading dark:text-white">
+          Our goal is to provide patients with high-quality medical care that is
+          easily accessible and affordable.
         </p>
         <p className="text-[#272b41] dark:text-dark-muted">
-          web page editors now use Lorem Ipsum as their default model text, and
-          a search for 'lorem ipsum' will uncover many web sites still in their
-          infancy. Various versions have evolved over the years, sometimes
+          Welcome to our Doctor Online Consultation service on the Web3
+          platform. Our service offers patients the convenience of connecting
+          with licensed physicians from the comfort of their own home, without
+          having to physically visit a doctor's office.
+        </p>
+        <p className="text-[#272b41] dark:text-dark-muted">
+          Our platform utilizes the latest Web3 technology to provide a secure
+          and decentralized platform for patients and doctors to communicate.
+          This means that patient data is kept confidential and secure, and
+          there is no risk of third-party interference.
         </p>
         <button className="bg-primary-blue text-white px-2 py-2 rounded-md dark:bg-primary-yellow dark:text-black">
           Read More...

@@ -10,7 +10,7 @@ import { MdClose } from "react-icons/md";
 import { Dna } from "react-loader-spinner";
 import { useAccount, useSigner } from "wagmi";
 import { useProvider } from "wagmi";
-import { Chat } from "@pushprotocol/uiweb";
+// import { Chat } from "@pushprotocol/uiweb";
 
 
 type props = {
@@ -124,7 +124,7 @@ const JoinAppointment: React.FC<props> = ({
                 Join Meeting
               </Link>
             </div>
-            {address ? (
+            {/* {address ? (
               <Chat
               account="0x6430C47973FA053fc8F055e7935EC6C2271D5174" //user address
               supportAddress="0xd9c1CCAcD4B8a745e191b62BA3fcaD87229CB26d" //support address
@@ -133,7 +133,7 @@ const JoinAppointment: React.FC<props> = ({
             />
             ) : (
               ""
-            )}
+            )} */}
           </div>
         ) : (
           <div className="flex justify-end items-center">

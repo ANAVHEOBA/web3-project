@@ -91,7 +91,7 @@ function Pharmacy() {
   }, []);
   return (
     <div>
-      <Breadcrumb />
+      <Breadcrumb heading="Pharmacies" subHeading="Home / Pharmacies" />
       <div className="mx-5">
         {pharmacyList ? (
           <div className="space-y-5 my-5">

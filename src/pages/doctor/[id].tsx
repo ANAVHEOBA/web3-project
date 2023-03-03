@@ -5,7 +5,7 @@ import React from "react";
 function doctorProfile() {
   return (
     <div>
-      <Breadcrumb />
+      <Breadcrumb subHeading="Home/ Doctor Profile" heading="Doctor Profile" />
       <DoctorProfile />
     </div>
   );

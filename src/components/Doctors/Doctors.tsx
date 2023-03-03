@@ -50,6 +50,8 @@ function Doctors() {
           chargeStart: meta.minAmount,
           chargeEnd: 0,
           slotTime: "",
+          city: meta.city,
+          state: meta.state,
           id: d.doctorId.toString(),
         };
       })
@@ -63,7 +65,7 @@ function Doctors() {
 
   return (
     <div>
-      <Breadcrumb />
+      <Breadcrumb heading="Doctors" subHeading="Home/ Doctors" />
       {doctorData ? (
         <div className="mx-5 my-3 space-y-3">
           {doctorData &&

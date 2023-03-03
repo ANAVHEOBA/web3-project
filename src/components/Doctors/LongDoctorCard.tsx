@@ -15,6 +15,8 @@ interface doctorStruct {
   slotTime: string;
   chargeStart: number;
   chargeEnd: number;
+  city: string;
+  state: string
 }
 
 function LongDoctorCard(doctorData: doctorStruct) {
@@ -52,7 +54,7 @@ function LongDoctorCard(doctorData: doctorStruct) {
             </div>
             <div className="flex space-x-2 items-center">
               <GoLocation className="h-6 w-6" />
-              <span>{doctorData.address}, USA</span>
+              <span>{doctorData.city}, {doctorData.state}</span>
             </div>
             <div className="flex space-x-2 items-center">
               <BiMoney className="h-6 w-6" />

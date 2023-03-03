@@ -20,15 +20,21 @@ function OverviewTab() {
   ];
   return (
     <div className="space-y-3 text-[#272b41]">
-      <h5 className="text-[#272b41] text-lg font-medium dark:text-white">About Me</h5>
+      <h5 className="text-[#272b41] text-lg font-medium dark:text-white">
+        About Me
+      </h5>
       <p className="text-[#272b41] dark:text-dark-muted">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Dr. Ananya Polam Reddy. has been working in the field of Obstetrics and
+        Gynaecology since 2013. She specializes in Reproductive medicine as well
+        as general obstetrics and gynaecology. Prior to joining our practice, Dr
+        Ananya attended Rajiv Gandhi University, where she earned her
+        postgraduate degree. She was trained in infertility procedures in
+        Advanced Fertility Center, Odessa Regional Medical Center in Texas, USA.
+        Her special interest is in treating infertility patients. Before joining
+        us Dr Ananya has worked in reputed hospitals like Vydehi Hospital,
+        Manipal Hospitals Bangalore and Yasomathi hospital and now she is a
+        Consultant Obstetrician and gynaecologist, at Koshy's Hospital,
+        Bangalore
       </p>
       <div className="space-y-2">
         <h5 className="font-medium text-lg dark:text-white">Services</h5>
