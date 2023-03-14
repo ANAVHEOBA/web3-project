@@ -49,7 +49,7 @@ const CreateAppointmentModal: React.FC<props> = ({
       );
       console.log(appointmentData);
       
-      let traction = await patientRegisterContract.createAppoitment(
+      let traction = await patientRegisterContract.createAppointment(
         localStorage.getItem('patientId')?.toString(),
         selectedDoctor.id,
         appointmentData.symptoms,

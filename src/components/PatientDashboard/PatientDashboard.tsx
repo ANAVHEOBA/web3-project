@@ -90,7 +90,7 @@ function PatientDashboard() {
       deDoctorABI,
       signer || provider
     );
-    let traction = await patientRegisterContract.getAppimtmentsByPatientId(
+    let traction = await patientRegisterContract.getAppointmentsByPatientId(
       localStorage.getItem("patientId")?.toString()
     );
     let newItems: any = await Promise.all(
@@ -102,7 +102,7 @@ function PatientDashboard() {
           symptoms: d.symptoms,
           time: d.time,
           date: d.date,
-          appointmentId: d.appojntemtId.toString(),
+          appointmentId: d.id.toString(),
         };
       })
     );

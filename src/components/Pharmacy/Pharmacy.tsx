@@ -69,11 +69,12 @@ function Pharmacy() {
     let newItems: any = await Promise.all(
       data.map(async (d: any) => {
         console.log(d);
-        let meta: any = await axios.get(d.pharmacyUri);
+
+        let meta: any = await axios.get(d.uri);
         meta = meta.data;
         console.log(meta);
         return {
-          id: d.pharmacyId.toString(),
+          id: d.id.toString(),
           name: meta.name,
           address: meta.address,
           openTime: meta.startTime,
@@ -88,7 +89,7 @@ function Pharmacy() {
 
   useEffect(() => {
     updateData();
-  }, []);
+  });
   return (
     <div>
       <Breadcrumb heading="Pharmacies" subHeading="Home / Pharmacies" />

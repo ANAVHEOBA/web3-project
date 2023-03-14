@@ -4,6 +4,104 @@
     "inputs": [
       {
         "indexed": true,
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "patientId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "doctorId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "symptoms",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "pastSymptoms",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "date",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "time",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      }
+    ],
+    "name": "AppointmentCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "patientId",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "walletAddress",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "gender",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "city",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "internalType": "string",
+        "name": "patientUri",
+        "type": "string"
+      }
+    ],
+    "name": "PatientRegistered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
         "internalType": "string",
         "name": "name",
         "type": "string"
@@ -72,17 +170,17 @@
       {
         "indexed": false,
         "internalType": "string",
-        "name": "pharmacyNumber",
+        "name": "number",
         "type": "string"
       },
       {
         "indexed": false,
         "internalType": "string",
-        "name": "pharmacyUri",
+        "name": "uri",
         "type": "string"
       }
     ],
-    "name": "RegsiteredPharmacy",
+    "name": "RegisteredPharmacy",
     "type": "event"
   },
   {
@@ -118,7 +216,7 @@
         "type": "string"
       }
     ],
-    "name": "createAppoitment",
+    "name": "createAppointment",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -186,7 +284,7 @@
         "components": [
           {
             "internalType": "uint256",
-            "name": "pharmacyId",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -211,16 +309,16 @@
           },
           {
             "internalType": "string",
-            "name": "pharmacyNumber",
+            "name": "number",
             "type": "string"
           },
           {
             "internalType": "string",
-            "name": "pharmacyUri",
+            "name": "uri",
             "type": "string"
           }
         ],
-        "internalType": "struct DeDoctor.PhamacySturct[]",
+        "internalType": "struct DeDoctor.Pharmacy[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -236,13 +334,13 @@
         "type": "uint256"
       }
     ],
-    "name": "getAppimtmentsByDoctortId",
+    "name": "getAppointmentsByDoctorId",
     "outputs": [
       {
         "components": [
           {
             "internalType": "uint256",
-            "name": "appojntemtId",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -286,7 +384,7 @@
             "type": "address"
           }
         ],
-        "internalType": "struct DeDoctor.AppointmentStruct[]",
+        "internalType": "struct DeDoctor.Appointment[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -302,13 +400,13 @@
         "type": "uint256"
       }
     ],
-    "name": "getAppimtmentsByPatientId",
+    "name": "getAppointmentsByPatientId",
     "outputs": [
       {
         "components": [
           {
             "internalType": "uint256",
-            "name": "appojntemtId",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -352,7 +450,7 @@
             "type": "address"
           }
         ],
-        "internalType": "struct DeDoctor.AppointmentStruct[]",
+        "internalType": "struct DeDoctor.Appointment[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -525,7 +623,7 @@
             "type": "string"
           }
         ],
-        "internalType": "struct DeDoctor.PatientStruct",
+        "internalType": "struct DeDoctor.Patient",
         "name": "",
         "type": "tuple"
       }
@@ -547,7 +645,7 @@
         "components": [
           {
             "internalType": "uint256",
-            "name": "pharmacyId",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -572,18 +670,67 @@
           },
           {
             "internalType": "string",
-            "name": "pharmacyNumber",
+            "name": "number",
             "type": "string"
           },
           {
             "internalType": "string",
-            "name": "pharmacyUri",
+            "name": "uri",
             "type": "string"
           }
         ],
-        "internalType": "struct DeDoctor.PhamacySturct",
+        "internalType": "struct DeDoctor.Pharmacy",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "pharmacies",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "city",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "ownerName",
+        "type": "string"
+      },
+      {
+        "internalType": "address",
+        "name": "ownerAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "number",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "uri",
+        "type": "string"
       }
     ],
     "stateMutability": "view",
@@ -661,7 +808,13 @@
       }
     ],
     "name": "registerPatient",
-    "outputs": [],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -689,12 +842,12 @@
       },
       {
         "internalType": "string",
-        "name": "pharmacyNumber",
+        "name": "number",
         "type": "string"
       },
       {
         "internalType": "string",
-        "name": "pharmacyUri",
+        "name": "uri",
         "type": "string"
       }
     ],
@@ -704,7 +857,7 @@
         "components": [
           {
             "internalType": "uint256",
-            "name": "pharmacyId",
+            "name": "id",
             "type": "uint256"
           },
           {
@@ -729,16 +882,16 @@
           },
           {
             "internalType": "string",
-            "name": "pharmacyNumber",
+            "name": "number",
             "type": "string"
           },
           {
             "internalType": "string",
-            "name": "pharmacyUri",
+            "name": "uri",
             "type": "string"
           }
         ],
-        "internalType": "struct DeDoctor.PhamacySturct",
+        "internalType": "struct DeDoctor.Pharmacy",
         "name": "",
         "type": "tuple"
       }

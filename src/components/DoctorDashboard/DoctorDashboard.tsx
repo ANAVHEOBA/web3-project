@@ -39,7 +39,7 @@ function DoctorDashboard() {
       deDoctorABI,
       signer || provider
     );
-    let traction = await patientRegisterContract.getAppimtmentsByDoctortId(
+    let traction = await patientRegisterContract.getAppointmentsByDoctorId(
       doctorData.doctorId
     );
     let newItems: any = await Promise.all(
@@ -51,7 +51,7 @@ function DoctorDashboard() {
           symptoms: d.symptoms,
           time: d.time,
           date: d.date,
-          appointmentId: d.appojntemtId.toString(),
+          appointmentId: d.id.toString(),
         };
       })
     );

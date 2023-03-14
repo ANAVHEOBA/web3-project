@@ -28,10 +28,10 @@ function PharmacyDetails() {
     );
     let traction = await patientRegisterContract.getPharmacyById(pharmacyId);
     const data: any = traction;
-    let meta: any = await axios.get(data.pharmacyUri);
+    let meta: any = await axios.get(data.uri);
     meta = meta.data;
     let jsonData: any = {
-      id: traction.pharmacyId.toString(),
+      id: traction.id.toString(),
       name: meta.name,
       address: meta.address,
       openTime: meta.startTime,
